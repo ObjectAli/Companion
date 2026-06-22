@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="companion-security" />
+        <module name="companion-data" />
+        <module name="companion-web" />
+        <module name="companion-domain" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Companion" target="17" />
+      <module name="domain" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="companion-data" options="-parameters" />
+      <module name="companion-domain" options="-parameters" />
+      <module name="companion-security" options="-parameters" />
+      <module name="companion-web" options="-parameters" />
+      <module name="domain" options="-parameters" />
+    </option>
+  </component>
+</project>
