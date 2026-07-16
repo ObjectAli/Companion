@@ -1,0 +1,46 @@
+services:
+  # PostgreSQL база данных
+  postgres:
+    image: postgres:18-alpine  # легковесная версия
+    container_name: myapp-postgres
+    environment:
+      POSTGRES_DB: companion_db
+      POSTGRES_USER: companion_db_user
+      POSTGRES_PASSWORD: companion_db_password
+    ports:
+      - "5432:5432"  # пробрасываем порт наружу
+    volumes:
+      - postgres_data:/var/lib/postgresql/18/docker  # сохраняем данные между перезапусками
+    networks:
+      - myapp-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U companion_db_user -d companion_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Приложение (опционально для разработки)
+#  app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: myapp-spring
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/myapp_db
+#      SPRING_DATASOURCE_USERNAME: myapp_user
+#      SPRING_DATASOURCE_PASSWORD: myapp_password
+#      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
+#    networks:
+#      - myapp-network
+
+volumes:
+  postgres_data:
+
+networks:
+  myapp-network:
+    driver: bridge

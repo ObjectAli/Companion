@@ -11,4 +11,13 @@
         <artifactId>companion-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
 </project>

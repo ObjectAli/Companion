@@ -1,0 +1,103 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>companion-database</artifactId>
+    <name>companion-database</name>
+
+    <parent>
+        <groupId>com.companion</groupId>
+        <artifactId>companion-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jooq</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>11.19.1</version> <!-- Версия должна совпадать с flyway-core -->
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--Накат flyway скриптов на БД, а затем генерация классов JOOQ ->-->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>11.19.1</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase> <!-- Flyway выполняется на этой фазе -->
+                        <goals>
+                            <goal>migrate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <url>jdbc:postgresql://localhost:5432/companion_db</url>
+                    <user>companion_db_user</user>
+                    <password>companion_db_password</password>
+                    <locations>
+                        <location>filesystem:src/main/resources/db/migration
+                        </location> <!-- Указываем путь к вашим скриптам -->
+                    </locations>
+                    <schemas>
+                        <schema>public</schema> <!-- или ваша схема -->
+                    </schemas>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq-codegen-maven</artifactId>
+                <version>3.19.28</version>  <!-- Такую же версию тянет Spring Boot Starter -->
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase> <!-- jOOQ выполняется на той же фазе, но позже -->
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- Конфигурация подключения к той же БД -->
+                    <jdbc>
+                        <url>jdbc:postgresql://localhost:5432/companion_db</url>
+                        <user>companion_db_user</user>
+                        <password>companion_db_password</password>
+                    </jdbc>
+                    <generator>
+                        <database>
+                            <includes>.*</includes> <!-- Генерируем классы для всех таблиц -->
+                            <excludes>flyway_schema_history</excludes> <!-- Исключаем служебную таблицу Flyway -->
+                            <inputSchema>public</inputSchema> <!-- Или ваша схема -->
+                        </database>
+                        <target>
+                            <packageName>com.companion.jooq.generated
+                            </packageName> <!-- Пакет для сгенерированных классов -->
+                            <directory>src/main/jooq-generated</directory> <!-- Папка для исходников -->
+                        </target>
+                    </generator>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
