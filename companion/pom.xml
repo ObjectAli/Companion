@@ -22,7 +22,7 @@
     </properties>
 
     <modules>
-        <module>domain</module>
+        <module>database</module>
         <module>data</module>
         <module>security</module>
         <module>web</module>
