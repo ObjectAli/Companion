@@ -4,6 +4,9 @@
 package com.companion.jooq.generated;
 
 
+import com.companion.jooq.generated.tables.EventMessages;
+import com.companion.jooq.generated.tables.EventParticipants;
+import com.companion.jooq.generated.tables.Events;
 import com.companion.jooq.generated.tables.Users;
 
 import java.util.Arrays;
@@ -28,6 +31,21 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
+     * The table <code>public.event_messages</code>.
+     */
+    public final EventMessages EVENT_MESSAGES = EventMessages.EVENT_MESSAGES;
+
+    /**
+     * The table <code>public.event_participants</code>.
+     */
+    public final EventParticipants EVENT_PARTICIPANTS = EventParticipants.EVENT_PARTICIPANTS;
+
+    /**
+     * The table <code>public.events</code>.
+     */
+    public final Events EVENTS = Events.EVENTS;
+
+    /**
      * The table <code>public.users</code>.
      */
     public final Users USERS = Users.USERS;
@@ -48,6 +66,9 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            EventMessages.EVENT_MESSAGES,
+            EventParticipants.EVENT_PARTICIPANTS,
+            Events.EVENTS,
             Users.USERS
         );
     }

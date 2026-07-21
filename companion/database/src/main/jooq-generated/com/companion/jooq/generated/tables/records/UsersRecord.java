@@ -185,4 +185,24 @@ public class UsersRecord extends UpdatableRecordImpl<UsersRecord> {
         setCreatedAt(createdAt);
         resetChangedOnNotNull();
     }
+
+    /**
+     * Create a detached, initialised UsersRecord
+     */
+    public UsersRecord(com.companion.jooq.generated.tables.pojos.Users value) {
+        super(Users.USERS);
+
+        if (value != null) {
+            setId(value.getId());
+            setPhone(value.getPhone());
+            setEmail(value.getEmail());
+            setTgUsername(value.getTgUsername());
+            setFullName(value.getFullName());
+            setAvatarUrl(value.getAvatarUrl());
+            setRating(value.getRating());
+            setRole(value.getRole());
+            setCreatedAt(value.getCreatedAt());
+            resetChangedOnNotNull();
+        }
+    }
 }

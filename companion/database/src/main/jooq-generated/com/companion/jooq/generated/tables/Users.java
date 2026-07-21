@@ -6,6 +6,9 @@ package com.companion.jooq.generated.tables;
 
 import com.companion.jooq.generated.Keys;
 import com.companion.jooq.generated.Public;
+import com.companion.jooq.generated.tables.EventMessages.EventMessagesPath;
+import com.companion.jooq.generated.tables.EventParticipants.EventParticipantsPath;
+import com.companion.jooq.generated.tables.Events.EventsPath;
 import com.companion.jooq.generated.tables.records.UsersRecord;
 
 import java.math.BigDecimal;
@@ -17,9 +20,13 @@ import java.util.UUID;
 
 import org.jooq.Condition;
 import org.jooq.Field;
+import org.jooq.ForeignKey;
+import org.jooq.InverseForeignKey;
 import org.jooq.Name;
+import org.jooq.Path;
 import org.jooq.PlainSQL;
 import org.jooq.QueryPart;
+import org.jooq.Record;
 import org.jooq.SQL;
 import org.jooq.Schema;
 import org.jooq.Select;
@@ -128,6 +135,39 @@ public class Users extends TableImpl<UsersRecord> {
         this(DSL.name("users"), null);
     }
 
+    public <O extends Record> Users(Table<O> path, ForeignKey<O, UsersRecord> childPath, InverseForeignKey<O, UsersRecord> parentPath) {
+        super(path, childPath, parentPath, USERS);
+    }
+
+    /**
+     * A subtype implementing {@link Path} for simplified path-based joins.
+     */
+    public static class UsersPath extends Users implements Path<UsersRecord> {
+
+        private static final long serialVersionUID = 1L;
+        public <O extends Record> UsersPath(Table<O> path, ForeignKey<O, UsersRecord> childPath, InverseForeignKey<O, UsersRecord> parentPath) {
+            super(path, childPath, parentPath);
+        }
+        private UsersPath(Name alias, Table<UsersRecord> aliased) {
+            super(alias, aliased);
+        }
+
+        @Override
+        public UsersPath as(String alias) {
+            return new UsersPath(DSL.name(alias), this);
+        }
+
+        @Override
+        public UsersPath as(Name alias) {
+            return new UsersPath(alias, this);
+        }
+
+        @Override
+        public UsersPath as(Table<?> alias) {
+            return new UsersPath(alias.getQualifiedName(), this);
+        }
+    }
+
     @Override
     public Schema getSchema() {
         return aliased() ? null : Public.PUBLIC;
@@ -141,6 +181,45 @@ public class Users extends TableImpl<UsersRecord> {
     @Override
     public List<UniqueKey<UsersRecord>> getUniqueKeys() {
         return Arrays.asList(Keys.USERS_EMAIL_KEY, Keys.USERS_PHONE_KEY, Keys.USERS_TG_USERNAME_KEY);
+    }
+
+    private transient EventMessagesPath _eventMessages;
+
+    /**
+     * Get the implicit to-many join path to the
+     * <code>public.event_messages</code> table
+     */
+    public EventMessagesPath eventMessages() {
+        if (_eventMessages == null)
+            _eventMessages = new EventMessagesPath(this, null, Keys.EVENT_MESSAGES__EVENT_MESSAGES_USER_ID_FKEY.getInverseKey());
+
+        return _eventMessages;
+    }
+
+    private transient EventParticipantsPath _eventParticipants;
+
+    /**
+     * Get the implicit to-many join path to the
+     * <code>public.event_participants</code> table
+     */
+    public EventParticipantsPath eventParticipants() {
+        if (_eventParticipants == null)
+            _eventParticipants = new EventParticipantsPath(this, null, Keys.EVENT_PARTICIPANTS__EVENT_PARTICIPANTS_USER_ID_FKEY.getInverseKey());
+
+        return _eventParticipants;
+    }
+
+    private transient EventsPath _events;
+
+    /**
+     * Get the implicit to-many join path to the <code>public.events</code>
+     * table
+     */
+    public EventsPath events() {
+        if (_events == null)
+            _events = new EventsPath(this, null, Keys.EVENTS__EVENTS_ORGANIZER_ID_FKEY.getInverseKey());
+
+        return _events;
     }
 
     @Override
