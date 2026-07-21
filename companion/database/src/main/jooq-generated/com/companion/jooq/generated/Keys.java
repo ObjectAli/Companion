@@ -4,9 +4,16 @@
 package com.companion.jooq.generated;
 
 
+import com.companion.jooq.generated.tables.EventMessages;
+import com.companion.jooq.generated.tables.EventParticipants;
+import com.companion.jooq.generated.tables.Events;
 import com.companion.jooq.generated.tables.Users;
+import com.companion.jooq.generated.tables.records.EventMessagesRecord;
+import com.companion.jooq.generated.tables.records.EventParticipantsRecord;
+import com.companion.jooq.generated.tables.records.EventsRecord;
 import com.companion.jooq.generated.tables.records.UsersRecord;
 
+import org.jooq.ForeignKey;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
@@ -24,8 +31,22 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<EventMessagesRecord> EVENT_MESSAGES_PKEY = Internal.createUniqueKey(EventMessages.EVENT_MESSAGES, DSL.name("event_messages_pkey"), new TableField[] { EventMessages.EVENT_MESSAGES.ID }, true);
+    public static final UniqueKey<EventParticipantsRecord> EVENT_PARTICIPANTS_EVENT_ID_USER_ID_KEY = Internal.createUniqueKey(EventParticipants.EVENT_PARTICIPANTS, DSL.name("event_participants_event_id_user_id_key"), new TableField[] { EventParticipants.EVENT_PARTICIPANTS.EVENT_ID, EventParticipants.EVENT_PARTICIPANTS.USER_ID }, true);
+    public static final UniqueKey<EventParticipantsRecord> EVENT_PARTICIPANTS_PKEY = Internal.createUniqueKey(EventParticipants.EVENT_PARTICIPANTS, DSL.name("event_participants_pkey"), new TableField[] { EventParticipants.EVENT_PARTICIPANTS.ID }, true);
+    public static final UniqueKey<EventsRecord> EVENTS_PKEY = Internal.createUniqueKey(Events.EVENTS, DSL.name("events_pkey"), new TableField[] { Events.EVENTS.ID }, true);
     public static final UniqueKey<UsersRecord> USERS_EMAIL_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_email_key"), new TableField[] { Users.USERS.EMAIL }, true);
     public static final UniqueKey<UsersRecord> USERS_PHONE_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_phone_key"), new TableField[] { Users.USERS.PHONE }, true);
     public static final UniqueKey<UsersRecord> USERS_PKEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_pkey"), new TableField[] { Users.USERS.ID }, true);
     public static final UniqueKey<UsersRecord> USERS_TG_USERNAME_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_tg_username_key"), new TableField[] { Users.USERS.TG_USERNAME }, true);
+
+    // -------------------------------------------------------------------------
+    // FOREIGN KEY definitions
+    // -------------------------------------------------------------------------
+
+    public static final ForeignKey<EventMessagesRecord, EventsRecord> EVENT_MESSAGES__EVENT_MESSAGES_EVENT_ID_FKEY = Internal.createForeignKey(EventMessages.EVENT_MESSAGES, DSL.name("event_messages_event_id_fkey"), new TableField[] { EventMessages.EVENT_MESSAGES.EVENT_ID }, Keys.EVENTS_PKEY, new TableField[] { Events.EVENTS.ID }, true);
+    public static final ForeignKey<EventMessagesRecord, UsersRecord> EVENT_MESSAGES__EVENT_MESSAGES_USER_ID_FKEY = Internal.createForeignKey(EventMessages.EVENT_MESSAGES, DSL.name("event_messages_user_id_fkey"), new TableField[] { EventMessages.EVENT_MESSAGES.USER_ID }, Keys.USERS_PKEY, new TableField[] { Users.USERS.ID }, true);
+    public static final ForeignKey<EventParticipantsRecord, EventsRecord> EVENT_PARTICIPANTS__EVENT_PARTICIPANTS_EVENT_ID_FKEY = Internal.createForeignKey(EventParticipants.EVENT_PARTICIPANTS, DSL.name("event_participants_event_id_fkey"), new TableField[] { EventParticipants.EVENT_PARTICIPANTS.EVENT_ID }, Keys.EVENTS_PKEY, new TableField[] { Events.EVENTS.ID }, true);
+    public static final ForeignKey<EventParticipantsRecord, UsersRecord> EVENT_PARTICIPANTS__EVENT_PARTICIPANTS_USER_ID_FKEY = Internal.createForeignKey(EventParticipants.EVENT_PARTICIPANTS, DSL.name("event_participants_user_id_fkey"), new TableField[] { EventParticipants.EVENT_PARTICIPANTS.USER_ID }, Keys.USERS_PKEY, new TableField[] { Users.USERS.ID }, true);
+    public static final ForeignKey<EventsRecord, UsersRecord> EVENTS__EVENTS_ORGANIZER_ID_FKEY = Internal.createForeignKey(Events.EVENTS, DSL.name("events_organizer_id_fkey"), new TableField[] { Events.EVENTS.ORGANIZER_ID }, Keys.USERS_PKEY, new TableField[] { Users.USERS.ID }, true);
 }

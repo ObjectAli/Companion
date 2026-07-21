@@ -4,6 +4,9 @@
 package com.companion.jooq.generated;
 
 
+import com.companion.jooq.generated.tables.EventMessages;
+import com.companion.jooq.generated.tables.EventParticipants;
+import com.companion.jooq.generated.tables.Events;
 import com.companion.jooq.generated.tables.Users;
 
 
@@ -12,6 +15,21 @@ import com.companion.jooq.generated.tables.Users;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
+
+    /**
+     * The table <code>public.event_messages</code>.
+     */
+    public static final EventMessages EVENT_MESSAGES = EventMessages.EVENT_MESSAGES;
+
+    /**
+     * The table <code>public.event_participants</code>.
+     */
+    public static final EventParticipants EVENT_PARTICIPANTS = EventParticipants.EVENT_PARTICIPANTS;
+
+    /**
+     * The table <code>public.events</code>.
+     */
+    public static final Events EVENTS = Events.EVENTS;
 
     /**
      * The table <code>public.users</code>.

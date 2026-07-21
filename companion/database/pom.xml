@@ -85,15 +85,19 @@
                     </jdbc>
                     <generator>
                         <database>
-                            <includes>.*</includes> <!-- Генерируем классы для всех таблиц -->
+                            <includes>events|users|event_participants|event_messages</includes> <!-- Генерируем классы для всех таблиц -->
                             <excludes>flyway_schema_history</excludes> <!-- Исключаем служебную таблицу Flyway -->
                             <inputSchema>public</inputSchema> <!-- Или ваша схема -->
                         </database>
                         <target>
-                            <packageName>com.companion.jooq.generated
-                            </packageName> <!-- Пакет для сгенерированных классов -->
+                            <packageName>com.companion.jooq.generated</packageName> <!-- Пакет для сгенерированных классов -->
                             <directory>src/main/jooq-generated</directory> <!-- Папка для исходников -->
                         </target>
+                        <generate>
+                            <pojos>true</pojos>
+                            <interfaces>false</interfaces>
+                            <routines>false</routines>
+                        </generate>
                     </generator>
                 </configuration>
             </plugin>
