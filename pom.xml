@@ -6,16 +6,83 @@
     <groupId>com.companion</groupId>
     <artifactId>companion-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
-    <name>Companion Parent Project</name>
+    <version>1.0-SNAPSHOT</version>
+    <name>Companion Parent</name>
 
-<!--    <properties>-->
-<!--        <maven.compiler.source>21</maven.compiler.source>-->
-<!--        <maven.compiler.target>21</maven.compiler.target>-->
-<!--        <tacocloud.version>${project.version}</tacocloud.version>-->
-<!--    </properties>-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.0.0</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <modules>
-        <module>companion</module>
+        <module>database</module>
+        <module>core</module>
+        <module>security</module>
+        <module>web</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Внутренние модули -->
+            <dependency>
+                <groupId>com.companion</groupId>
+                <artifactId>core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.companion</groupId>
+                <artifactId>database</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.companion</groupId>
+                <artifactId>security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.companion</groupId>
+                <artifactId>web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.11.0</version>
+                    <configuration>
+                        <source>17</source>
+                        <target>17</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.jooq</groupId>
+                    <artifactId>jooq-codegen-maven</artifactId>
+                    <version>${jooq.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.flywaydb</groupId>
+                    <artifactId>flyway-maven-plugin</artifactId>
+                    <version>${flyway.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
