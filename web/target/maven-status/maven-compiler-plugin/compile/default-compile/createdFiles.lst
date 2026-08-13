@@ -1,0 +1,4 @@
+com\companion\web\controller\DisplayEventController.class
+com\companion\web\dto\response\DisplayEventsResponse.class
+com\companion\web\controller\AbstractController.class
+com\companion\web\dto\request\SearchEventsRequest.class
