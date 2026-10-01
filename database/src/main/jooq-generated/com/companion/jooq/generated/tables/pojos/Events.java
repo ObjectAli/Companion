@@ -25,6 +25,7 @@ public class Events implements Serializable {
     private String category;
     private LocalDateTime eventTime;
     private Integer durationMinutes;
+    private Boolean isAdultsFlg;
     private String locationName;
     private Double locationLat;
     private Double locationLon;
@@ -34,6 +35,7 @@ public class Events implements Serializable {
     private Integer currentParticipants;
     private String status;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Events() {}
 
@@ -45,6 +47,7 @@ public class Events implements Serializable {
         this.category = value.category;
         this.eventTime = value.eventTime;
         this.durationMinutes = value.durationMinutes;
+        this.isAdultsFlg = value.isAdultsFlg;
         this.locationName = value.locationName;
         this.locationLat = value.locationLat;
         this.locationLon = value.locationLon;
@@ -54,6 +57,7 @@ public class Events implements Serializable {
         this.currentParticipants = value.currentParticipants;
         this.status = value.status;
         this.createdAt = value.createdAt;
+        this.updatedAt = value.updatedAt;
     }
 
     public Events(
@@ -64,6 +68,7 @@ public class Events implements Serializable {
         String category,
         LocalDateTime eventTime,
         Integer durationMinutes,
+        Boolean isAdultsFlg,
         String locationName,
         Double locationLat,
         Double locationLon,
@@ -72,7 +77,8 @@ public class Events implements Serializable {
         Integer maxParticipants,
         Integer currentParticipants,
         String status,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
     ) {
         this.id = id;
         this.organizerId = organizerId;
@@ -81,6 +87,7 @@ public class Events implements Serializable {
         this.category = category;
         this.eventTime = eventTime;
         this.durationMinutes = durationMinutes;
+        this.isAdultsFlg = isAdultsFlg;
         this.locationName = locationName;
         this.locationLat = locationLat;
         this.locationLon = locationLon;
@@ -90,6 +97,7 @@ public class Events implements Serializable {
         this.currentParticipants = currentParticipants;
         this.status = status;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     /**
@@ -188,6 +196,20 @@ public class Events implements Serializable {
      */
     public void setDurationMinutes(Integer durationMinutes) {
         this.durationMinutes = durationMinutes;
+    }
+
+    /**
+     * Getter for <code>public.events.is_adults_flg</code>.
+     */
+    public Boolean getIsAdultsFlg() {
+        return this.isAdultsFlg;
+    }
+
+    /**
+     * Setter for <code>public.events.is_adults_flg</code>.
+     */
+    public void setIsAdultsFlg(Boolean isAdultsFlg) {
+        this.isAdultsFlg = isAdultsFlg;
     }
 
     /**
@@ -328,6 +350,20 @@ public class Events implements Serializable {
         this.createdAt = createdAt;
     }
 
+    /**
+     * Getter for <code>public.events.updated_at</code>.
+     */
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    /**
+     * Setter for <code>public.events.updated_at</code>.
+     */
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -378,6 +414,12 @@ public class Events implements Serializable {
                 return false;
         }
         else if (!this.durationMinutes.equals(other.durationMinutes))
+            return false;
+        if (this.isAdultsFlg == null) {
+            if (other.isAdultsFlg != null)
+                return false;
+        }
+        else if (!this.isAdultsFlg.equals(other.isAdultsFlg))
             return false;
         if (this.locationName == null) {
             if (other.locationName != null)
@@ -433,6 +475,12 @@ public class Events implements Serializable {
         }
         else if (!this.createdAt.equals(other.createdAt))
             return false;
+        if (this.updatedAt == null) {
+            if (other.updatedAt != null)
+                return false;
+        }
+        else if (!this.updatedAt.equals(other.updatedAt))
+            return false;
         return true;
     }
 
@@ -447,6 +495,7 @@ public class Events implements Serializable {
         result = prime * result + ((this.category == null) ? 0 : this.category.hashCode());
         result = prime * result + ((this.eventTime == null) ? 0 : this.eventTime.hashCode());
         result = prime * result + ((this.durationMinutes == null) ? 0 : this.durationMinutes.hashCode());
+        result = prime * result + ((this.isAdultsFlg == null) ? 0 : this.isAdultsFlg.hashCode());
         result = prime * result + ((this.locationName == null) ? 0 : this.locationName.hashCode());
         result = prime * result + ((this.locationLat == null) ? 0 : this.locationLat.hashCode());
         result = prime * result + ((this.locationLon == null) ? 0 : this.locationLon.hashCode());
@@ -456,6 +505,7 @@ public class Events implements Serializable {
         result = prime * result + ((this.currentParticipants == null) ? 0 : this.currentParticipants.hashCode());
         result = prime * result + ((this.status == null) ? 0 : this.status.hashCode());
         result = prime * result + ((this.createdAt == null) ? 0 : this.createdAt.hashCode());
+        result = prime * result + ((this.updatedAt == null) ? 0 : this.updatedAt.hashCode());
         return result;
     }
 
@@ -470,6 +520,7 @@ public class Events implements Serializable {
         sb.append(", ").append(category);
         sb.append(", ").append(eventTime);
         sb.append(", ").append(durationMinutes);
+        sb.append(", ").append(isAdultsFlg);
         sb.append(", ").append(locationName);
         sb.append(", ").append(locationLat);
         sb.append(", ").append(locationLon);
@@ -479,6 +530,7 @@ public class Events implements Serializable {
         sb.append(", ").append(currentParticipants);
         sb.append(", ").append(status);
         sb.append(", ").append(createdAt);
+        sb.append(", ").append(updatedAt);
 
         sb.append(")");
         return sb.toString();

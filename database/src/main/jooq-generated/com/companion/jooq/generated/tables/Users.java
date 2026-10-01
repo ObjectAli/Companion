@@ -12,6 +12,7 @@ import com.companion.jooq.generated.tables.Events.EventsPath;
 import com.companion.jooq.generated.tables.records.UsersRecord;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
@@ -67,6 +68,41 @@ public class Users extends TableImpl<UsersRecord> {
     public final TableField<UsersRecord, UUID> ID = createField(DSL.name("id"), SQLDataType.UUID.nullable(false).defaultValue(DSL.field(DSL.raw("gen_random_uuid()"), SQLDataType.UUID)), this, "");
 
     /**
+     * The column <code>public.users.username</code>.
+     */
+    public final TableField<UsersRecord, String> USERNAME = createField(DSL.name("username"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+
+    /**
+     * The column <code>public.users.surname</code>.
+     */
+    public final TableField<UsersRecord, String> SURNAME = createField(DSL.name("surname"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+
+    /**
+     * The column <code>public.users.name</code>.
+     */
+    public final TableField<UsersRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+
+    /**
+     * The column <code>public.users.patronymic</code>.
+     */
+    public final TableField<UsersRecord, String> PATRONYMIC = createField(DSL.name("patronymic"), SQLDataType.VARCHAR(50), this, "");
+
+    /**
+     * The column <code>public.users.about_user</code>.
+     */
+    public final TableField<UsersRecord, String> ABOUT_USER = createField(DSL.name("about_user"), SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>public.users.password_hash</code>.
+     */
+    public final TableField<UsersRecord, String> PASSWORD_HASH = createField(DSL.name("password_hash"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+
+    /**
+     * The column <code>public.users.birth_date</code>.
+     */
+    public final TableField<UsersRecord, LocalDate> BIRTH_DATE = createField(DSL.name("birth_date"), SQLDataType.LOCALDATE, this, "");
+
+    /**
      * The column <code>public.users.phone</code>.
      */
     public final TableField<UsersRecord, String> PHONE = createField(DSL.name("phone"), SQLDataType.VARCHAR(15), this, "");
@@ -82,11 +118,6 @@ public class Users extends TableImpl<UsersRecord> {
     public final TableField<UsersRecord, String> TG_USERNAME = createField(DSL.name("tg_username"), SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>public.users.full_name</code>.
-     */
-    public final TableField<UsersRecord, String> FULL_NAME = createField(DSL.name("full_name"), SQLDataType.VARCHAR(255), this, "");
-
-    /**
      * The column <code>public.users.avatar_url</code>.
      */
     public final TableField<UsersRecord, String> AVATAR_URL = createField(DSL.name("avatar_url"), SQLDataType.CLOB, this, "");
@@ -97,14 +128,14 @@ public class Users extends TableImpl<UsersRecord> {
     public final TableField<UsersRecord, BigDecimal> RATING = createField(DSL.name("rating"), SQLDataType.NUMERIC(3, 2).defaultValue(DSL.field(DSL.raw("5.0"), SQLDataType.NUMERIC)), this, "");
 
     /**
-     * The column <code>public.users.role</code>.
-     */
-    public final TableField<UsersRecord, String> ROLE = createField(DSL.name("role"), SQLDataType.VARCHAR(50).defaultValue(DSL.field(DSL.raw("'participant'::character varying"), SQLDataType.VARCHAR)), this, "");
-
-    /**
      * The column <code>public.users.created_at</code>.
      */
     public final TableField<UsersRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field(DSL.raw("now()"), SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>public.users.updated_at</code>.
+     */
+    public final TableField<UsersRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6), this, "");
 
     private Users(Name alias, Table<UsersRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
@@ -180,7 +211,7 @@ public class Users extends TableImpl<UsersRecord> {
 
     @Override
     public List<UniqueKey<UsersRecord>> getUniqueKeys() {
-        return Arrays.asList(Keys.USERS_EMAIL_KEY, Keys.USERS_PHONE_KEY, Keys.USERS_TG_USERNAME_KEY);
+        return Arrays.asList(Keys.USERS_EMAIL_KEY, Keys.USERS_PHONE_KEY, Keys.USERS_TG_USERNAME_KEY, Keys.USERS_USERNAME_KEY);
     }
 
     private transient EventMessagesPath _eventMessages;

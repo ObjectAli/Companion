@@ -6,8 +6,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(value = {
-        "com.companion.feature.displayevents.*",
-        "com.companion.feature.displayusers.*"
+        "com.companion.feature",
+        "com.companion.security",
+        "com.companion.web", "com.companion.web.cors"
 })
 public class CompanionStarter {
 

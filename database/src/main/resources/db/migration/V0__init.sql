@@ -2,14 +2,20 @@ create schema if not exists public;
 
 CREATE TABLE users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    username VARCHAR(50) UNIQUE NOT NULL,
+    surname VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    patronymic VARCHAR(50) NULL,
+    about_user VARCHAR(255) NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    birth_date DATE,
     phone VARCHAR(15) UNIQUE,
     email VARCHAR(255) UNIQUE,
     tg_username VARCHAR(255) UNIQUE,
-    full_name VARCHAR(255),
     avatar_url TEXT,
     rating DECIMAL(3,2) DEFAULT 5.0,
-    role VARCHAR(50) DEFAULT 'participant',
-    created_at TIMESTAMP DEFAULT NOW()
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP NULL
 );
 
 -- Мероприятия
@@ -21,6 +27,7 @@ CREATE TABLE events (
     category VARCHAR(100),  -- 'football', 'movie', 'coffee', 'hiking'
     event_time TIMESTAMP NOT NULL,
     duration_minutes INTEGER DEFAULT 60,
+    is_adults_flg BOOLEAN default false,
 
     -- Место (с геоданными через PostGIS)
     location_name VARCHAR(255),  -- "Стадион Лужники, 3 поле"
@@ -34,6 +41,7 @@ CREATE TABLE events (
 
     status VARCHAR(50) DEFAULT 'active',  -- active, cancelled, completed
     created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP NULL,
 
     -- Создаём пространственный индекс
     CONSTRAINT events_location_geo_check CHECK (ST_IsValid(location_geo::geometry))

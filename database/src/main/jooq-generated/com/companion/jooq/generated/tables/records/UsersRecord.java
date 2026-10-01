@@ -7,6 +7,7 @@ package com.companion.jooq.generated.tables.records;
 import com.companion.jooq.generated.tables.Users;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -37,115 +38,199 @@ public class UsersRecord extends UpdatableRecordImpl<UsersRecord> {
     }
 
     /**
+     * Setter for <code>public.users.username</code>.
+     */
+    public void setUsername(String value) {
+        set(1, value);
+    }
+
+    /**
+     * Getter for <code>public.users.username</code>.
+     */
+    public String getUsername() {
+        return (String) get(1);
+    }
+
+    /**
+     * Setter for <code>public.users.surname</code>.
+     */
+    public void setSurname(String value) {
+        set(2, value);
+    }
+
+    /**
+     * Getter for <code>public.users.surname</code>.
+     */
+    public String getSurname() {
+        return (String) get(2);
+    }
+
+    /**
+     * Setter for <code>public.users.name</code>.
+     */
+    public void setName(String value) {
+        set(3, value);
+    }
+
+    /**
+     * Getter for <code>public.users.name</code>.
+     */
+    public String getName() {
+        return (String) get(3);
+    }
+
+    /**
+     * Setter for <code>public.users.patronymic</code>.
+     */
+    public void setPatronymic(String value) {
+        set(4, value);
+    }
+
+    /**
+     * Getter for <code>public.users.patronymic</code>.
+     */
+    public String getPatronymic() {
+        return (String) get(4);
+    }
+
+    /**
+     * Setter for <code>public.users.about_user</code>.
+     */
+    public void setAboutUser(String value) {
+        set(5, value);
+    }
+
+    /**
+     * Getter for <code>public.users.about_user</code>.
+     */
+    public String getAboutUser() {
+        return (String) get(5);
+    }
+
+    /**
+     * Setter for <code>public.users.password_hash</code>.
+     */
+    public void setPasswordHash(String value) {
+        set(6, value);
+    }
+
+    /**
+     * Getter for <code>public.users.password_hash</code>.
+     */
+    public String getPasswordHash() {
+        return (String) get(6);
+    }
+
+    /**
+     * Setter for <code>public.users.birth_date</code>.
+     */
+    public void setBirthDate(LocalDate value) {
+        set(7, value);
+    }
+
+    /**
+     * Getter for <code>public.users.birth_date</code>.
+     */
+    public LocalDate getBirthDate() {
+        return (LocalDate) get(7);
+    }
+
+    /**
      * Setter for <code>public.users.phone</code>.
      */
     public void setPhone(String value) {
-        set(1, value);
+        set(8, value);
     }
 
     /**
      * Getter for <code>public.users.phone</code>.
      */
     public String getPhone() {
-        return (String) get(1);
+        return (String) get(8);
     }
 
     /**
      * Setter for <code>public.users.email</code>.
      */
     public void setEmail(String value) {
-        set(2, value);
+        set(9, value);
     }
 
     /**
      * Getter for <code>public.users.email</code>.
      */
     public String getEmail() {
-        return (String) get(2);
+        return (String) get(9);
     }
 
     /**
      * Setter for <code>public.users.tg_username</code>.
      */
     public void setTgUsername(String value) {
-        set(3, value);
+        set(10, value);
     }
 
     /**
      * Getter for <code>public.users.tg_username</code>.
      */
     public String getTgUsername() {
-        return (String) get(3);
-    }
-
-    /**
-     * Setter for <code>public.users.full_name</code>.
-     */
-    public void setFullName(String value) {
-        set(4, value);
-    }
-
-    /**
-     * Getter for <code>public.users.full_name</code>.
-     */
-    public String getFullName() {
-        return (String) get(4);
+        return (String) get(10);
     }
 
     /**
      * Setter for <code>public.users.avatar_url</code>.
      */
     public void setAvatarUrl(String value) {
-        set(5, value);
+        set(11, value);
     }
 
     /**
      * Getter for <code>public.users.avatar_url</code>.
      */
     public String getAvatarUrl() {
-        return (String) get(5);
+        return (String) get(11);
     }
 
     /**
      * Setter for <code>public.users.rating</code>.
      */
     public void setRating(BigDecimal value) {
-        set(6, value);
+        set(12, value);
     }
 
     /**
      * Getter for <code>public.users.rating</code>.
      */
     public BigDecimal getRating() {
-        return (BigDecimal) get(6);
-    }
-
-    /**
-     * Setter for <code>public.users.role</code>.
-     */
-    public void setRole(String value) {
-        set(7, value);
-    }
-
-    /**
-     * Getter for <code>public.users.role</code>.
-     */
-    public String getRole() {
-        return (String) get(7);
+        return (BigDecimal) get(12);
     }
 
     /**
      * Setter for <code>public.users.created_at</code>.
      */
     public void setCreatedAt(LocalDateTime value) {
-        set(8, value);
+        set(13, value);
     }
 
     /**
      * Getter for <code>public.users.created_at</code>.
      */
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(8);
+        return (LocalDateTime) get(13);
+    }
+
+    /**
+     * Setter for <code>public.users.updated_at</code>.
+     */
+    public void setUpdatedAt(LocalDateTime value) {
+        set(14, value);
+    }
+
+    /**
+     * Getter for <code>public.users.updated_at</code>.
+     */
+    public LocalDateTime getUpdatedAt() {
+        return (LocalDateTime) get(14);
     }
 
     // -------------------------------------------------------------------------
@@ -171,18 +256,24 @@ public class UsersRecord extends UpdatableRecordImpl<UsersRecord> {
     /**
      * Create a detached, initialised UsersRecord
      */
-    public UsersRecord(UUID id, String phone, String email, String tgUsername, String fullName, String avatarUrl, BigDecimal rating, String role, LocalDateTime createdAt) {
+    public UsersRecord(UUID id, String username, String surname, String name, String patronymic, String aboutUser, String passwordHash, LocalDate birthDate, String phone, String email, String tgUsername, String avatarUrl, BigDecimal rating, LocalDateTime createdAt, LocalDateTime updatedAt) {
         super(Users.USERS);
 
         setId(id);
+        setUsername(username);
+        setSurname(surname);
+        setName(name);
+        setPatronymic(patronymic);
+        setAboutUser(aboutUser);
+        setPasswordHash(passwordHash);
+        setBirthDate(birthDate);
         setPhone(phone);
         setEmail(email);
         setTgUsername(tgUsername);
-        setFullName(fullName);
         setAvatarUrl(avatarUrl);
         setRating(rating);
-        setRole(role);
         setCreatedAt(createdAt);
+        setUpdatedAt(updatedAt);
         resetChangedOnNotNull();
     }
 
@@ -194,14 +285,20 @@ public class UsersRecord extends UpdatableRecordImpl<UsersRecord> {
 
         if (value != null) {
             setId(value.getId());
+            setUsername(value.getUsername());
+            setSurname(value.getSurname());
+            setName(value.getName());
+            setPatronymic(value.getPatronymic());
+            setAboutUser(value.getAboutUser());
+            setPasswordHash(value.getPasswordHash());
+            setBirthDate(value.getBirthDate());
             setPhone(value.getPhone());
             setEmail(value.getEmail());
             setTgUsername(value.getTgUsername());
-            setFullName(value.getFullName());
             setAvatarUrl(value.getAvatarUrl());
             setRating(value.getRating());
-            setRole(value.getRole());
             setCreatedAt(value.getCreatedAt());
+            setUpdatedAt(value.getUpdatedAt());
             resetChangedOnNotNull();
         }
     }

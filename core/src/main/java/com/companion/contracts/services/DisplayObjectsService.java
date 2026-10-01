@@ -13,5 +13,5 @@ import java.util.List;
  */
 public interface DisplayObjectsService<R, S> {
 
-    Result<QueryResult<R>, List<ErrorDetail>> execute(S querySpecification);
+    Result<QueryResult<R>, List<ErrorDetail>> get(S querySpecification);
 }

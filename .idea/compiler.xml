@@ -10,7 +10,6 @@
         <module name="companion-security" />
         <module name="companion-database" />
         <module name="companion-web" />
-        <module name="companion-domain" />
         <module name="companion-core" />
       </profile>
     </annotationProcessing>

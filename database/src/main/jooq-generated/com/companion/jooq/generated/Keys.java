@@ -39,6 +39,7 @@ public class Keys {
     public static final UniqueKey<UsersRecord> USERS_PHONE_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_phone_key"), new TableField[] { Users.USERS.PHONE }, true);
     public static final UniqueKey<UsersRecord> USERS_PKEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_pkey"), new TableField[] { Users.USERS.ID }, true);
     public static final UniqueKey<UsersRecord> USERS_TG_USERNAME_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_tg_username_key"), new TableField[] { Users.USERS.TG_USERNAME }, true);
+    public static final UniqueKey<UsersRecord> USERS_USERNAME_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_username_key"), new TableField[] { Users.USERS.USERNAME }, true);
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
