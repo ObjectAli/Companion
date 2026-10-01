@@ -1,6 +1,7 @@
 package com.companion.common.query;
 
 import com.companion.contracts.validators.DatabaseQueryValidator;
+import java.util.Collections;
 import com.companion.common.error.ErrorDetail;
 import lombok.Data;
 import org.jooq.Condition;
@@ -66,6 +67,6 @@ public class QueryParameters implements DatabaseQueryValidator {
 
     @Override
     public List<ErrorDetail> validate() {
-        return null;
+        return Collections.emptyList();
     }
 }

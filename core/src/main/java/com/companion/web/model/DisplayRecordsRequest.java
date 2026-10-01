@@ -26,16 +26,17 @@ public class DisplayRecordsRequest implements RequestBodyValidator {
         return errorsList;
     }
 
-    protected final List<String> sortByAcceptableValues = List.of("date");
-    protected final List<String> sortDirectionAcceptableValues = List.of("asc", "desc");
-
     protected void validateSortBy(List<ErrorDetail> errorsList){
-        ValidationUtil.stringIsNotEmpty(errorsList, sortBy, "sortBy");
-        ValidationUtil.stringContainInvalidValue(errorsList, sortBy, "sortBy", sortByAcceptableValues);
+        if (sortBy != null) {
+            ValidationUtil.stringIsNotEmpty(errorsList, sortBy, "sortBy");
+            ValidationUtil.stringContainInvalidValue(errorsList, sortBy, "sortBy", List.of("date"));
+        }
     }
 
-    protected void validateSortDirection(List<ErrorDetail> errorsList){
-        ValidationUtil.stringIsNotEmpty(errorsList, sortDirection, "sortDirection");
-        ValidationUtil.stringContainInvalidValue(errorsList, sortDirection, "sortDirection", sortDirectionAcceptableValues);
+    protected void validateSortDirection(List<ErrorDetail> errorsList) {
+        if (sortDirection != null) {
+            ValidationUtil.stringIsNotEmpty(errorsList, sortDirection, "sortDirection");
+            ValidationUtil.stringContainInvalidValue(errorsList, sortDirection, "sortDirection", List.of("asc", "desc"));
+        }
     }
 }

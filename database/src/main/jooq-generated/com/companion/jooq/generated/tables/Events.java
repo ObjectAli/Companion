@@ -102,6 +102,11 @@ public class Events extends TableImpl<EventsRecord> {
     public final TableField<EventsRecord, Integer> DURATION_MINUTES = createField(DSL.name("duration_minutes"), SQLDataType.INTEGER.defaultValue(DSL.field(DSL.raw("60"), SQLDataType.INTEGER)), this, "");
 
     /**
+     * The column <code>public.events.is_adults_flg</code>.
+     */
+    public final TableField<EventsRecord, Boolean> IS_ADULTS_FLG = createField(DSL.name("is_adults_flg"), SQLDataType.BOOLEAN.defaultValue(DSL.field(DSL.raw("false"), SQLDataType.BOOLEAN)), this, "");
+
+    /**
      * The column <code>public.events.location_name</code>.
      */
     public final TableField<EventsRecord, String> LOCATION_NAME = createField(DSL.name("location_name"), SQLDataType.VARCHAR(255), this, "");
@@ -151,6 +156,11 @@ public class Events extends TableImpl<EventsRecord> {
      * The column <code>public.events.created_at</code>.
      */
     public final TableField<EventsRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field(DSL.raw("now()"), SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>public.events.updated_at</code>.
+     */
+    public final TableField<EventsRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6), this, "");
 
     private Events(Name alias, Table<EventsRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);

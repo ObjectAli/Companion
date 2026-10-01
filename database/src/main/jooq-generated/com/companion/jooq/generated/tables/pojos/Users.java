@@ -6,6 +6,7 @@ package com.companion.jooq.generated.tables.pojos;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -19,49 +20,73 @@ public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private UUID id;
+    private String username;
+    private String surname;
+    private String name;
+    private String patronymic;
+    private String aboutUser;
+    private String passwordHash;
+    private LocalDate birthDate;
     private String phone;
     private String email;
     private String tgUsername;
-    private String fullName;
     private String avatarUrl;
     private BigDecimal rating;
-    private String role;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Users() {}
 
     public Users(Users value) {
         this.id = value.id;
+        this.username = value.username;
+        this.surname = value.surname;
+        this.name = value.name;
+        this.patronymic = value.patronymic;
+        this.aboutUser = value.aboutUser;
+        this.passwordHash = value.passwordHash;
+        this.birthDate = value.birthDate;
         this.phone = value.phone;
         this.email = value.email;
         this.tgUsername = value.tgUsername;
-        this.fullName = value.fullName;
         this.avatarUrl = value.avatarUrl;
         this.rating = value.rating;
-        this.role = value.role;
         this.createdAt = value.createdAt;
+        this.updatedAt = value.updatedAt;
     }
 
     public Users(
         UUID id,
+        String username,
+        String surname,
+        String name,
+        String patronymic,
+        String aboutUser,
+        String passwordHash,
+        LocalDate birthDate,
         String phone,
         String email,
         String tgUsername,
-        String fullName,
         String avatarUrl,
         BigDecimal rating,
-        String role,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
     ) {
         this.id = id;
+        this.username = username;
+        this.surname = surname;
+        this.name = name;
+        this.patronymic = patronymic;
+        this.aboutUser = aboutUser;
+        this.passwordHash = passwordHash;
+        this.birthDate = birthDate;
         this.phone = phone;
         this.email = email;
         this.tgUsername = tgUsername;
-        this.fullName = fullName;
         this.avatarUrl = avatarUrl;
         this.rating = rating;
-        this.role = role;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     /**
@@ -76,6 +101,104 @@ public class Users implements Serializable {
      */
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    /**
+     * Getter for <code>public.users.username</code>.
+     */
+    public String getUsername() {
+        return this.username;
+    }
+
+    /**
+     * Setter for <code>public.users.username</code>.
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * Getter for <code>public.users.surname</code>.
+     */
+    public String getSurname() {
+        return this.surname;
+    }
+
+    /**
+     * Setter for <code>public.users.surname</code>.
+     */
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    /**
+     * Getter for <code>public.users.name</code>.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Setter for <code>public.users.name</code>.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Getter for <code>public.users.patronymic</code>.
+     */
+    public String getPatronymic() {
+        return this.patronymic;
+    }
+
+    /**
+     * Setter for <code>public.users.patronymic</code>.
+     */
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    /**
+     * Getter for <code>public.users.about_user</code>.
+     */
+    public String getAboutUser() {
+        return this.aboutUser;
+    }
+
+    /**
+     * Setter for <code>public.users.about_user</code>.
+     */
+    public void setAboutUser(String aboutUser) {
+        this.aboutUser = aboutUser;
+    }
+
+    /**
+     * Getter for <code>public.users.password_hash</code>.
+     */
+    public String getPasswordHash() {
+        return this.passwordHash;
+    }
+
+    /**
+     * Setter for <code>public.users.password_hash</code>.
+     */
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    /**
+     * Getter for <code>public.users.birth_date</code>.
+     */
+    public LocalDate getBirthDate() {
+        return this.birthDate;
+    }
+
+    /**
+     * Setter for <code>public.users.birth_date</code>.
+     */
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     /**
@@ -121,20 +244,6 @@ public class Users implements Serializable {
     }
 
     /**
-     * Getter for <code>public.users.full_name</code>.
-     */
-    public String getFullName() {
-        return this.fullName;
-    }
-
-    /**
-     * Setter for <code>public.users.full_name</code>.
-     */
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    /**
      * Getter for <code>public.users.avatar_url</code>.
      */
     public String getAvatarUrl() {
@@ -163,20 +272,6 @@ public class Users implements Serializable {
     }
 
     /**
-     * Getter for <code>public.users.role</code>.
-     */
-    public String getRole() {
-        return this.role;
-    }
-
-    /**
-     * Setter for <code>public.users.role</code>.
-     */
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    /**
      * Getter for <code>public.users.created_at</code>.
      */
     public LocalDateTime getCreatedAt() {
@@ -188,6 +283,20 @@ public class Users implements Serializable {
      */
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    /**
+     * Getter for <code>public.users.updated_at</code>.
+     */
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    /**
+     * Setter for <code>public.users.updated_at</code>.
+     */
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
@@ -204,6 +313,48 @@ public class Users implements Serializable {
                 return false;
         }
         else if (!this.id.equals(other.id))
+            return false;
+        if (this.username == null) {
+            if (other.username != null)
+                return false;
+        }
+        else if (!this.username.equals(other.username))
+            return false;
+        if (this.surname == null) {
+            if (other.surname != null)
+                return false;
+        }
+        else if (!this.surname.equals(other.surname))
+            return false;
+        if (this.name == null) {
+            if (other.name != null)
+                return false;
+        }
+        else if (!this.name.equals(other.name))
+            return false;
+        if (this.patronymic == null) {
+            if (other.patronymic != null)
+                return false;
+        }
+        else if (!this.patronymic.equals(other.patronymic))
+            return false;
+        if (this.aboutUser == null) {
+            if (other.aboutUser != null)
+                return false;
+        }
+        else if (!this.aboutUser.equals(other.aboutUser))
+            return false;
+        if (this.passwordHash == null) {
+            if (other.passwordHash != null)
+                return false;
+        }
+        else if (!this.passwordHash.equals(other.passwordHash))
+            return false;
+        if (this.birthDate == null) {
+            if (other.birthDate != null)
+                return false;
+        }
+        else if (!this.birthDate.equals(other.birthDate))
             return false;
         if (this.phone == null) {
             if (other.phone != null)
@@ -223,12 +374,6 @@ public class Users implements Serializable {
         }
         else if (!this.tgUsername.equals(other.tgUsername))
             return false;
-        if (this.fullName == null) {
-            if (other.fullName != null)
-                return false;
-        }
-        else if (!this.fullName.equals(other.fullName))
-            return false;
         if (this.avatarUrl == null) {
             if (other.avatarUrl != null)
                 return false;
@@ -241,17 +386,17 @@ public class Users implements Serializable {
         }
         else if (!this.rating.equals(other.rating))
             return false;
-        if (this.role == null) {
-            if (other.role != null)
-                return false;
-        }
-        else if (!this.role.equals(other.role))
-            return false;
         if (this.createdAt == null) {
             if (other.createdAt != null)
                 return false;
         }
         else if (!this.createdAt.equals(other.createdAt))
+            return false;
+        if (this.updatedAt == null) {
+            if (other.updatedAt != null)
+                return false;
+        }
+        else if (!this.updatedAt.equals(other.updatedAt))
             return false;
         return true;
     }
@@ -261,14 +406,20 @@ public class Users implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
+        result = prime * result + ((this.username == null) ? 0 : this.username.hashCode());
+        result = prime * result + ((this.surname == null) ? 0 : this.surname.hashCode());
+        result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
+        result = prime * result + ((this.patronymic == null) ? 0 : this.patronymic.hashCode());
+        result = prime * result + ((this.aboutUser == null) ? 0 : this.aboutUser.hashCode());
+        result = prime * result + ((this.passwordHash == null) ? 0 : this.passwordHash.hashCode());
+        result = prime * result + ((this.birthDate == null) ? 0 : this.birthDate.hashCode());
         result = prime * result + ((this.phone == null) ? 0 : this.phone.hashCode());
         result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
         result = prime * result + ((this.tgUsername == null) ? 0 : this.tgUsername.hashCode());
-        result = prime * result + ((this.fullName == null) ? 0 : this.fullName.hashCode());
         result = prime * result + ((this.avatarUrl == null) ? 0 : this.avatarUrl.hashCode());
         result = prime * result + ((this.rating == null) ? 0 : this.rating.hashCode());
-        result = prime * result + ((this.role == null) ? 0 : this.role.hashCode());
         result = prime * result + ((this.createdAt == null) ? 0 : this.createdAt.hashCode());
+        result = prime * result + ((this.updatedAt == null) ? 0 : this.updatedAt.hashCode());
         return result;
     }
 
@@ -277,14 +428,20 @@ public class Users implements Serializable {
         StringBuilder sb = new StringBuilder("Users (");
 
         sb.append(id);
+        sb.append(", ").append(username);
+        sb.append(", ").append(surname);
+        sb.append(", ").append(name);
+        sb.append(", ").append(patronymic);
+        sb.append(", ").append(aboutUser);
+        sb.append(", ").append(passwordHash);
+        sb.append(", ").append(birthDate);
         sb.append(", ").append(phone);
         sb.append(", ").append(email);
         sb.append(", ").append(tgUsername);
-        sb.append(", ").append(fullName);
         sb.append(", ").append(avatarUrl);
         sb.append(", ").append(rating);
-        sb.append(", ").append(role);
         sb.append(", ").append(createdAt);
+        sb.append(", ").append(updatedAt);
 
         sb.append(")");
         return sb.toString();

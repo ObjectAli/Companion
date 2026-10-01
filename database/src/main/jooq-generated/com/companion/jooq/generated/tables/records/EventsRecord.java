@@ -121,45 +121,59 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
     }
 
     /**
+     * Setter for <code>public.events.is_adults_flg</code>.
+     */
+    public void setIsAdultsFlg(Boolean value) {
+        set(7, value);
+    }
+
+    /**
+     * Getter for <code>public.events.is_adults_flg</code>.
+     */
+    public Boolean getIsAdultsFlg() {
+        return (Boolean) get(7);
+    }
+
+    /**
      * Setter for <code>public.events.location_name</code>.
      */
     public void setLocationName(String value) {
-        set(7, value);
+        set(8, value);
     }
 
     /**
      * Getter for <code>public.events.location_name</code>.
      */
     public String getLocationName() {
-        return (String) get(7);
+        return (String) get(8);
     }
 
     /**
      * Setter for <code>public.events.location_lat</code>.
      */
     public void setLocationLat(Double value) {
-        set(8, value);
+        set(9, value);
     }
 
     /**
      * Getter for <code>public.events.location_lat</code>.
      */
     public Double getLocationLat() {
-        return (Double) get(8);
+        return (Double) get(9);
     }
 
     /**
      * Setter for <code>public.events.location_lon</code>.
      */
     public void setLocationLon(Double value) {
-        set(9, value);
+        set(10, value);
     }
 
     /**
      * Getter for <code>public.events.location_lon</code>.
      */
     public Double getLocationLon() {
-        return (Double) get(9);
+        return (Double) get(10);
     }
 
     /**
@@ -172,7 +186,7 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
      */
     @Deprecated
     public void setLocationGeo(Object value) {
-        set(10, value);
+        set(11, value);
     }
 
     /**
@@ -185,77 +199,91 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
      */
     @Deprecated
     public Object getLocationGeo() {
-        return get(10);
+        return get(11);
     }
 
     /**
      * Setter for <code>public.events.price</code>.
      */
     public void setPrice(BigDecimal value) {
-        set(11, value);
+        set(12, value);
     }
 
     /**
      * Getter for <code>public.events.price</code>.
      */
     public BigDecimal getPrice() {
-        return (BigDecimal) get(11);
+        return (BigDecimal) get(12);
     }
 
     /**
      * Setter for <code>public.events.max_participants</code>.
      */
     public void setMaxParticipants(Integer value) {
-        set(12, value);
+        set(13, value);
     }
 
     /**
      * Getter for <code>public.events.max_participants</code>.
      */
     public Integer getMaxParticipants() {
-        return (Integer) get(12);
+        return (Integer) get(13);
     }
 
     /**
      * Setter for <code>public.events.current_participants</code>.
      */
     public void setCurrentParticipants(Integer value) {
-        set(13, value);
+        set(14, value);
     }
 
     /**
      * Getter for <code>public.events.current_participants</code>.
      */
     public Integer getCurrentParticipants() {
-        return (Integer) get(13);
+        return (Integer) get(14);
     }
 
     /**
      * Setter for <code>public.events.status</code>.
      */
     public void setStatus(String value) {
-        set(14, value);
+        set(15, value);
     }
 
     /**
      * Getter for <code>public.events.status</code>.
      */
     public String getStatus() {
-        return (String) get(14);
+        return (String) get(15);
     }
 
     /**
      * Setter for <code>public.events.created_at</code>.
      */
     public void setCreatedAt(LocalDateTime value) {
-        set(15, value);
+        set(16, value);
     }
 
     /**
      * Getter for <code>public.events.created_at</code>.
      */
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(15);
+        return (LocalDateTime) get(16);
+    }
+
+    /**
+     * Setter for <code>public.events.updated_at</code>.
+     */
+    public void setUpdatedAt(LocalDateTime value) {
+        set(17, value);
+    }
+
+    /**
+     * Getter for <code>public.events.updated_at</code>.
+     */
+    public LocalDateTime getUpdatedAt() {
+        return (LocalDateTime) get(17);
     }
 
     // -------------------------------------------------------------------------
@@ -281,7 +309,7 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
     /**
      * Create a detached, initialised EventsRecord
      */
-    public EventsRecord(UUID id, UUID organizerId, String title, String description, String category, LocalDateTime eventTime, Integer durationMinutes, String locationName, Double locationLat, Double locationLon, Object locationGeo, BigDecimal price, Integer maxParticipants, Integer currentParticipants, String status, LocalDateTime createdAt) {
+    public EventsRecord(UUID id, UUID organizerId, String title, String description, String category, LocalDateTime eventTime, Integer durationMinutes, Boolean isAdultsFlg, String locationName, Double locationLat, Double locationLon, Object locationGeo, BigDecimal price, Integer maxParticipants, Integer currentParticipants, String status, LocalDateTime createdAt, LocalDateTime updatedAt) {
         super(Events.EVENTS);
 
         setId(id);
@@ -291,6 +319,7 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
         setCategory(category);
         setEventTime(eventTime);
         setDurationMinutes(durationMinutes);
+        setIsAdultsFlg(isAdultsFlg);
         setLocationName(locationName);
         setLocationLat(locationLat);
         setLocationLon(locationLon);
@@ -300,6 +329,7 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
         setCurrentParticipants(currentParticipants);
         setStatus(status);
         setCreatedAt(createdAt);
+        setUpdatedAt(updatedAt);
         resetChangedOnNotNull();
     }
 
@@ -317,6 +347,7 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
             setCategory(value.getCategory());
             setEventTime(value.getEventTime());
             setDurationMinutes(value.getDurationMinutes());
+            setIsAdultsFlg(value.getIsAdultsFlg());
             setLocationName(value.getLocationName());
             setLocationLat(value.getLocationLat());
             setLocationLon(value.getLocationLon());
@@ -326,6 +357,7 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
             setCurrentParticipants(value.getCurrentParticipants());
             setStatus(value.getStatus());
             setCreatedAt(value.getCreatedAt());
+            setUpdatedAt(value.getUpdatedAt());
             resetChangedOnNotNull();
         }
     }
