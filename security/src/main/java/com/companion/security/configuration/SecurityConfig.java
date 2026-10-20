@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
                                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()         // нужно пропускать запрос с OPTIONS - нужно браузеру
-                                .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/auth/login").anonymous()    // вход
                                 .requestMatchers(HttpMethod.POST, "/accounts").permitAll()      // открытые endpoints
                                 .requestMatchers(HttpMethod.POST, "/events/feed").permitAll()   // открытые endpoints
 //                        .requestMatchers("/api/admin/**").hasRole("ADMIN") // только для админов

@@ -24,7 +24,7 @@ import org.jooq.impl.Internal;
  * A class modelling foreign key relationships and constraints of tables in
  * public.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes" })
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Keys {
 
     // -------------------------------------------------------------------------
@@ -36,9 +36,7 @@ public class Keys {
     public static final UniqueKey<EventParticipantsRecord> EVENT_PARTICIPANTS_PKEY = Internal.createUniqueKey(EventParticipants.EVENT_PARTICIPANTS, DSL.name("event_participants_pkey"), new TableField[] { EventParticipants.EVENT_PARTICIPANTS.ID }, true);
     public static final UniqueKey<EventsRecord> EVENTS_PKEY = Internal.createUniqueKey(Events.EVENTS, DSL.name("events_pkey"), new TableField[] { Events.EVENTS.ID }, true);
     public static final UniqueKey<UsersRecord> USERS_EMAIL_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_email_key"), new TableField[] { Users.USERS.EMAIL }, true);
-    public static final UniqueKey<UsersRecord> USERS_PHONE_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_phone_key"), new TableField[] { Users.USERS.PHONE }, true);
     public static final UniqueKey<UsersRecord> USERS_PKEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_pkey"), new TableField[] { Users.USERS.ID }, true);
-    public static final UniqueKey<UsersRecord> USERS_TG_USERNAME_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_tg_username_key"), new TableField[] { Users.USERS.TG_USERNAME }, true);
     public static final UniqueKey<UsersRecord> USERS_USERNAME_KEY = Internal.createUniqueKey(Users.USERS, DSL.name("users_username_key"), new TableField[] { Users.USERS.USERNAME }, true);
 
     // -------------------------------------------------------------------------

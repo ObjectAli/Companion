@@ -6,8 +6,6 @@ import com.companion.contracts.validators.RequestBodyValidator;
 import lombok.Data;
 import lombok.Getter;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,17 +14,8 @@ import java.util.List;
 public class CreateAccountDto implements RequestBodyValidator {
 
     private String username;       //псевдоним
-    private String surname;        //фамилия
-    private String name;           //имя
-    private String patronymic;     //отчество
-    private String aboutUser;      //дополнительная информация
-    private String passwordHash;   //хеш пароля
-    private LocalDate birthDate;   //день рождения
-    private String phone;          //телефон
     private String email;          //email
-    private String tgUsername;     //псевдоним в Телеграм
-    private String avatarUrl;      //фото профиля
-    private BigDecimal rating;     //рейтинг
+    private String password;       //пароль не в зашифрованном виде
 
     @Override
     public List<ErrorDetail> validate() {
@@ -38,29 +27,29 @@ public class CreateAccountDto implements RequestBodyValidator {
             final String attributeName = "username";
             ValidationUtil.fieldIsNotNull(errorDetails, username, attributeName);
             ValidationUtil.stringIsNotEmpty(errorDetails, username, attributeName);
-            ValidationUtil.stringLength(errorDetails, username, attributeName, 5, 10);
+            ValidationUtil.stringLength(errorDetails, username, attributeName, 6, 32);
         }
 
-        private void validateSurname(List<ErrorDetail> errorDetails) {
-            final String attributeName = "surname";
-            ValidationUtil.fieldIsNotNull(errorDetails, surname, attributeName);
-            ValidationUtil.stringIsNotEmpty(errorDetails, surname, attributeName);
-            ValidationUtil.stringLength(errorDetails, surname, attributeName, 2, 20);
+        private void validateEmail(List<ErrorDetail> errorDetails) {
+            final String attributeName = "email";
+            ValidationUtil.fieldIsNotNull(errorDetails, email, attributeName);
+            ValidationUtil.stringIsNotEmpty(errorDetails, email, attributeName);
+            ValidationUtil.stringLength(errorDetails, email, attributeName, 6, 32);
         }
 
-        private void validateName(List<ErrorDetail> errorDetails) {
-            final String attributeName = "name";
-            ValidationUtil.fieldIsNotNull(errorDetails, name, attributeName);
-            ValidationUtil.stringIsNotEmpty(errorDetails, name, attributeName);
-            ValidationUtil.stringLength(errorDetails, name, attributeName, 2, 10);
+        private void validatePassword(List<ErrorDetail> errorDetails) {
+            final String attributeName = "password";
+            ValidationUtil.fieldIsNotNull(errorDetails, password, attributeName);
+            ValidationUtil.stringIsNotEmpty(errorDetails, password, attributeName);
+            ValidationUtil.stringLength(errorDetails, password, attributeName, 6, 64);
         }
 
-        public List<ErrorDetail> execute(){
+        public List<ErrorDetail> execute() {
             List<ErrorDetail> errorsList = new ArrayList<>();
 
             validateUsername(errorsList);
-            validateSurname(errorsList);
-            validateName(errorsList);
+            validateEmail(errorsList);
+            validatePassword(errorsList);
 
             return errorsList;
         }

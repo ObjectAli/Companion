@@ -15,55 +15,52 @@ import java.util.UUID;
 public class AccountDto {
 
     private UUID id;
-    private String username;
-    private String surname;
-    private String name;
-    private String patronymic;
-    private String aboutUser;
-    private String passwordHash;
-    private LocalDate birthDate;
-    private String phone;
     private String email;
-    private String tgUsername;
+    private String passwordHash;
+    private String username;
+    private String name;
+    private String surname;
+    private LocalDate birthDate;
     private String avatarUrl;
-    private BigDecimal rating;
+    private String aboutUser;
+    private String city;
+    private String phone;
+    private String tgUsername;
+    private Object status;
+    private Boolean emailVerified;
+    private Boolean phoneVerified;
+    private Double participantRating;
+    private Double organizerRating;
+    private Integer eventsAttended;
+    private Integer eventsOrganized;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public static AccountDto toAccountDto(CreateAccountDto createAccountDto) {
+    public static AccountDto toAccountDto(CreateAccountDto createAccountDto, String encodedPassword) {
         return AccountDto.builder()
                 .id(UUID.randomUUID())
                 .username(createAccountDto.getUsername())
-                .surname(createAccountDto.getSurname())
-                .name(createAccountDto.getName())
-                .patronymic(createAccountDto.getPatronymic())
-                .aboutUser(createAccountDto.getAboutUser())
-                .passwordHash(createAccountDto.getPasswordHash())
-                .birthDate(createAccountDto.getBirthDate())
-                .phone(createAccountDto.getPhone())
                 .email(createAccountDto.getEmail())
-                .tgUsername(createAccountDto.getTgUsername())
-                .avatarUrl(createAccountDto.getAvatarUrl())
-                .rating(createAccountDto.getRating())
+                .passwordHash(encodedPassword)
+                .status("ACTIVE")
                 .createdAt(LocalDateTime.now())
                 .build();
     }
 
+    //TODO дозаполнить
     public static AccountDto toAccountDto(UpdateAccountDto updateAccountDto) {
         return AccountDto.builder()
                 .id(updateAccountDto.getId())
                 .username(updateAccountDto.getUsername())
                 .surname(updateAccountDto.getSurname())
                 .name(updateAccountDto.getName())
-                .patronymic(updateAccountDto.getPatronymic())
                 .aboutUser(updateAccountDto.getAboutUser())
-                .passwordHash(updateAccountDto.getPasswordHash())
+                .passwordHash(updateAccountDto.getPassword())
                 .birthDate(updateAccountDto.getBirthDate())
                 .phone(updateAccountDto.getPhone())
                 .email(updateAccountDto.getEmail())
                 .tgUsername(updateAccountDto.getTgUsername())
                 .avatarUrl(updateAccountDto.getAvatarUrl())
-                .rating(updateAccountDto.getRating())
                 .updatedAt(LocalDateTime.now())
                 .build();
     }
