@@ -7,6 +7,8 @@ import com.companion.feature.account.model.CreateAccountDto;
 import com.companion.feature.account.model.UpdateAccountDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -17,16 +19,23 @@ public class AccountManagementService implements ManagementObjectService<CreateA
     private static final Logger log = LoggerFactory.getLogger(AccountManagementService.class);
 
     private final AccountCommandRepository accountCommandRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public AccountManagementService(AccountCommandRepository accountCommandRepository) {
+    public AccountManagementService(
+            AccountCommandRepository accountCommandRepository,
+            PasswordEncoder passwordEncoder
+    ) {
         this.accountCommandRepository = accountCommandRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public Result<AccountDto, String> create(CreateAccountDto dto, UUID userId) {
         log.info("Creating account with username '{}'", dto.getUsername());
 
-        AccountDto accountDto = AccountDto.toAccountDto(dto);
+        String encodedPassword = passwordEncoder.encode(dto.getPassword());
+
+        AccountDto accountDto = AccountDto.toAccountDto(dto, encodedPassword);
 
         var createResult = accountCommandRepository.create(accountDto);
 

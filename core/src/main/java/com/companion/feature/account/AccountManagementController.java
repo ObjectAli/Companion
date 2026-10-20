@@ -13,19 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
 /**
- * POST   /api/v1/accounts                    -- создание аккаунта
+ * POST   /api/v1/registration                -- создание аккаунта
  * PUT    /api/v1/accounts/{id}               -- редактирование аккаунта
  * DELETE /api/v1/accounts/{id}               -- удаление аккаунта
  */
 @RestController
-@RequestMapping("/accounts")
 public class AccountManagementController extends AbstractController {
 
     private static final Logger log = LoggerFactory.getLogger(AccountManagementController.class);
@@ -36,34 +34,34 @@ public class AccountManagementController extends AbstractController {
     @Autowired
     CustomUserDetailsService userDetailsService;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @PostMapping
+    @PostMapping("/registration")
     public ResponseEntity<ApiResponse<Object>> createAccount(
             @RequestBody CreateAccountDto requestBody
     ) {
         log.info("Start create account with username: {}", requestBody.getUsername());
-
-//        requestBody.setPasswordHash(passwordEncoder.encode(requestBody.getPasswordHash()));
 
         //валидация web dto - проверка форматов, типов данных, enum-ов
         List<ErrorDetail> errors = requestBody.validate();
 
         //если есть ошибки выбрасываем ответ с ошибкой
         if (!errors.isEmpty()) {
-            log.error("{} request body validation is failed: {}", errors.toArray());
+            log.error("registration account request body validation is failed: {}", errors.toArray());
             return throwError(errors);
         }
 
         var result = accountManagementService.create(requestBody, null);
+
+        if (result.isFailure()) {
+            log.error("Create account with id {} and username {} was completed failed.", result.getBody().getId(), result.getBody().getUsername());
+            return throwError(result.getError());
+        }
 
         log.info("Create account with id {} and username {} was completed successfully.", result.getBody().getId(), result.getBody().getUsername());
 
         return ok(result.getBody(), 201);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/accounts/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ApiResponse<Object>> updateAccount(
             UpdateAccountDto requestBody,
@@ -74,7 +72,7 @@ public class AccountManagementController extends AbstractController {
         //валидация web dto - проверка форматов, типов данных, enum-ов
         List<ErrorDetail> errors = requestBody.validate();
         if (!errors.isEmpty()) {
-            log.error("{} request body validation is failed: {}", errors.toArray());
+            log.error("update account request body validation is failed: {}", errors.toArray());
             return throwError(errors);
         }
 
@@ -87,7 +85,7 @@ public class AccountManagementController extends AbstractController {
         return ok(result.getBody(), 200);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/accounts/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ApiResponse<Object>> deleteAccount(
             String id,

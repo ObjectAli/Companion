@@ -34,6 +34,18 @@ public abstract class AbstractController {
         return ResponseEntity.ok(response);
     }
 
+    protected ResponseEntity<ApiResponse<Object>> throwError(String error) {
+
+        ApiResponse<Object> response = ApiResponse.builder()
+                .statusCode(400)
+                .success(false)
+                .message(FAILED + " " + error)
+//                .errors(List.of(error))
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
     protected ResponseEntity<ApiResponse<Object>> ok(QueryResult<?> queryResult, int statusCode) {
         ApiResponse<Object> response = ApiResponse.builder()
                 .data(queryResult)
