@@ -18,15 +18,17 @@ public class CreateEventDto implements RequestBodyValidator {
     private String title;
     private String description;
     private String category;
+    private String genderRestriction;
     private LocalDateTime eventTime;
-    private Integer durationMinutes;
+    private LocalDateTime eventEndTime;
+//    private Integer durationMinutes;
     private String locationName;
     private Double locationLat;
     private Double locationLon;
     private Object locationGeo;
     private BigDecimal price;
     private Integer maxParticipants;
-    private Boolean onlyFor18;
+    private Boolean isAdults;
 
     @Override
     public List<ErrorDetail> validate() {
@@ -39,15 +41,17 @@ public class CreateEventDto implements RequestBodyValidator {
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
+                ", genderRestriction='" + genderRestriction + '\'' +
                 ", eventTime=" + eventTime +
-                ", durationMinutes=" + durationMinutes +
+                ", eventEndTime=" + eventEndTime +
+//                ", durationMinutes=" + durationMinutes +
                 ", locationName='" + locationName + '\'' +
                 ", locationLat=" + locationLat +
                 ", locationLon=" + locationLon +
                 ", locationGeo=" + locationGeo +
                 ", price=" + price +
                 ", maxParticipants=" + maxParticipants +
-                ", onlyFor18=" + onlyFor18 +
+                ", isAdults=" + isAdults +
                 '}';
     }
 
@@ -56,17 +60,17 @@ public class CreateEventDto implements RequestBodyValidator {
             final String attributeName = "title";
             ValidationUtil.fieldIsNotNull(errorDetails, title, attributeName);
             ValidationUtil.stringIsNotEmpty(errorDetails, title, attributeName);
-            ValidationUtil.stringLength(errorDetails, title, attributeName, 5, 20);
+            ValidationUtil.stringLength(errorDetails, title, attributeName, 5, 40);
         }
 
         private void validateDescription(List<ErrorDetail> errorDetails) {
             final String attributeName = "description";
             ValidationUtil.fieldIsNotNull(errorDetails, description, attributeName);
             ValidationUtil.stringIsNotEmpty(errorDetails, description, attributeName);
-            ValidationUtil.stringLength(errorDetails, description, attributeName, 10, 100);
+            ValidationUtil.stringLength(errorDetails, description, attributeName, 10, 200);
         }
 
-        public List<ErrorDetail> execute(){
+        public List<ErrorDetail> execute() {
             List<ErrorDetail> errorsList = new ArrayList<>();
 
             validateTitle(errorsList);

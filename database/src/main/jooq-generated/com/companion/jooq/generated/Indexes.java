@@ -23,8 +23,10 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index IDX_EVENTS_EVENT_TIME = Internal.createIndex(DSL.name("idx_events_event_time"), Events.EVENTS, new OrderField[] { Events.EVENTS.EVENT_TIME }, false);
-    public static final Index IDX_EVENTS_LOCATION_GEO = Internal.createIndex(DSL.name("idx_events_location_geo"), Events.EVENTS, new OrderField[] { Events.EVENTS.LOCATION_GEO }, false);
+    public static final Index IDX_EVENTS_CATEGORY = Internal.createIndex(DSL.name("idx_events_category"), Events.EVENTS, new OrderField[] { Events.EVENTS.CATEGORY }, false);
+    public static final Index IDX_EVENTS_ORGANIZER = Internal.createIndex(DSL.name("idx_events_organizer"), Events.EVENTS, new OrderField[] { Events.EVENTS.ORGANIZER_ID }, false);
+    public static final Index IDX_EVENTS_STATUS = Internal.createIndex(DSL.name("idx_events_status"), Events.EVENTS, new OrderField[] { Events.EVENTS.STATUS }, false);
+    public static final Index IDX_EVENTS_TIME = Internal.createIndex(DSL.name("idx_events_time"), Events.EVENTS, new OrderField[] { Events.EVENTS.EVENT_TIME }, false);
     public static final Index IDX_USER_CITY = Internal.createIndex(DSL.name("idx_user_city"), Users.USERS, new OrderField[] { Users.USERS.CITY }, false);
     public static final Index IDX_USER_EMAIL = Internal.createIndex(DSL.name("idx_user_email"), Users.USERS, new OrderField[] { Users.USERS.EMAIL }, false);
     public static final Index IDX_USER_USERNAME = Internal.createIndex(DSL.name("idx_user_username"), Users.USERS, new OrderField[] { Users.USERS.USERNAME }, false);

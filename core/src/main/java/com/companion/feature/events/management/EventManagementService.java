@@ -8,6 +8,7 @@ import com.companion.feature.events.management.model.UpdateEventDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -23,6 +24,7 @@ public class EventManagementService implements ManagementObjectService<CreateEve
     }
 
     @Override
+    @Transactional
     public Result<EventDto, String> create(CreateEventDto dto, UUID userId) {
         log.info("Creating event with name '{}'", dto.getTitle());
 
@@ -39,6 +41,7 @@ public class EventManagementService implements ManagementObjectService<CreateEve
     }
 
     @Override
+    @Transactional
     public Result<EventDto, String> update(UpdateEventDto dto, UUID userId) {
         log.info("Updating event with name '{}'", dto.getTitle());
 
@@ -55,6 +58,7 @@ public class EventManagementService implements ManagementObjectService<CreateEve
     }
 
     @Override
+    @Transactional
     public Result<UUID, String> delete(UUID id, UUID userId) {
         log.info("Deleting event with id '{}'", id);
 

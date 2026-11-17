@@ -4,9 +4,10 @@
 package com.companion.jooq.generated.tables.records;
 
 
+import com.companion.jooq.generated.enums.EventStatus;
+import com.companion.jooq.generated.enums.GenderRestriction;
 import com.companion.jooq.generated.tables.Events;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -107,73 +108,87 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
     }
 
     /**
-     * Setter for <code>public.events.duration_minutes</code>.
+     * Setter for <code>public.events.event_end_time</code>.
      */
-    public void setDurationMinutes(Integer value) {
+    public void setEventEndTime(LocalDateTime value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>public.events.duration_minutes</code>.
+     * Getter for <code>public.events.event_end_time</code>.
      */
-    public Integer getDurationMinutes() {
-        return (Integer) get(6);
+    public LocalDateTime getEventEndTime() {
+        return (LocalDateTime) get(6);
     }
 
     /**
-     * Setter for <code>public.events.is_adults_flg</code>.
+     * Setter for <code>public.events.is_adults</code>.
      */
-    public void setIsAdultsFlg(Boolean value) {
+    public void setIsAdults(Boolean value) {
         set(7, value);
     }
 
     /**
-     * Getter for <code>public.events.is_adults_flg</code>.
+     * Getter for <code>public.events.is_adults</code>.
      */
-    public Boolean getIsAdultsFlg() {
+    public Boolean getIsAdults() {
         return (Boolean) get(7);
+    }
+
+    /**
+     * Setter for <code>public.events.gender_restriction</code>.
+     */
+    public void setGenderRestriction(GenderRestriction value) {
+        set(8, value);
+    }
+
+    /**
+     * Getter for <code>public.events.gender_restriction</code>.
+     */
+    public GenderRestriction getGenderRestriction() {
+        return (GenderRestriction) get(8);
     }
 
     /**
      * Setter for <code>public.events.location_name</code>.
      */
     public void setLocationName(String value) {
-        set(8, value);
+        set(9, value);
     }
 
     /**
      * Getter for <code>public.events.location_name</code>.
      */
     public String getLocationName() {
-        return (String) get(8);
+        return (String) get(9);
     }
 
     /**
      * Setter for <code>public.events.location_lat</code>.
      */
     public void setLocationLat(Double value) {
-        set(9, value);
+        set(10, value);
     }
 
     /**
      * Getter for <code>public.events.location_lat</code>.
      */
     public Double getLocationLat() {
-        return (Double) get(9);
+        return (Double) get(10);
     }
 
     /**
      * Setter for <code>public.events.location_lon</code>.
      */
     public void setLocationLon(Double value) {
-        set(10, value);
+        set(11, value);
     }
 
     /**
      * Getter for <code>public.events.location_lon</code>.
      */
     public Double getLocationLon() {
-        return (Double) get(10);
+        return (Double) get(11);
     }
 
     /**
@@ -186,7 +201,7 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
      */
     @Deprecated
     public void setLocationGeo(Object value) {
-        set(11, value);
+        set(12, value);
     }
 
     /**
@@ -199,63 +214,49 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
      */
     @Deprecated
     public Object getLocationGeo() {
-        return get(11);
+        return get(12);
     }
 
     /**
      * Setter for <code>public.events.price</code>.
      */
-    public void setPrice(BigDecimal value) {
-        set(12, value);
+    public void setPrice(Integer value) {
+        set(13, value);
     }
 
     /**
      * Getter for <code>public.events.price</code>.
      */
-    public BigDecimal getPrice() {
-        return (BigDecimal) get(12);
+    public Integer getPrice() {
+        return (Integer) get(13);
     }
 
     /**
      * Setter for <code>public.events.max_participants</code>.
      */
     public void setMaxParticipants(Integer value) {
-        set(13, value);
+        set(14, value);
     }
 
     /**
      * Getter for <code>public.events.max_participants</code>.
      */
     public Integer getMaxParticipants() {
-        return (Integer) get(13);
-    }
-
-    /**
-     * Setter for <code>public.events.current_participants</code>.
-     */
-    public void setCurrentParticipants(Integer value) {
-        set(14, value);
-    }
-
-    /**
-     * Getter for <code>public.events.current_participants</code>.
-     */
-    public Integer getCurrentParticipants() {
         return (Integer) get(14);
     }
 
     /**
      * Setter for <code>public.events.status</code>.
      */
-    public void setStatus(String value) {
+    public void setStatus(EventStatus value) {
         set(15, value);
     }
 
     /**
      * Getter for <code>public.events.status</code>.
      */
-    public String getStatus() {
-        return (String) get(15);
+    public EventStatus getStatus() {
+        return (EventStatus) get(15);
     }
 
     /**
@@ -309,7 +310,7 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
     /**
      * Create a detached, initialised EventsRecord
      */
-    public EventsRecord(UUID id, UUID organizerId, String title, String description, String category, LocalDateTime eventTime, Integer durationMinutes, Boolean isAdultsFlg, String locationName, Double locationLat, Double locationLon, Object locationGeo, BigDecimal price, Integer maxParticipants, Integer currentParticipants, String status, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public EventsRecord(UUID id, UUID organizerId, String title, String description, String category, LocalDateTime eventTime, LocalDateTime eventEndTime, Boolean isAdults, GenderRestriction genderRestriction, String locationName, Double locationLat, Double locationLon, Object locationGeo, Integer price, Integer maxParticipants, EventStatus status, LocalDateTime createdAt, LocalDateTime updatedAt) {
         super(Events.EVENTS);
 
         setId(id);
@@ -318,15 +319,15 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
         setDescription(description);
         setCategory(category);
         setEventTime(eventTime);
-        setDurationMinutes(durationMinutes);
-        setIsAdultsFlg(isAdultsFlg);
+        setEventEndTime(eventEndTime);
+        setIsAdults(isAdults);
+        setGenderRestriction(genderRestriction);
         setLocationName(locationName);
         setLocationLat(locationLat);
         setLocationLon(locationLon);
         setLocationGeo(locationGeo);
         setPrice(price);
         setMaxParticipants(maxParticipants);
-        setCurrentParticipants(currentParticipants);
         setStatus(status);
         setCreatedAt(createdAt);
         setUpdatedAt(updatedAt);
@@ -346,15 +347,15 @@ public class EventsRecord extends UpdatableRecordImpl<EventsRecord> {
             setDescription(value.getDescription());
             setCategory(value.getCategory());
             setEventTime(value.getEventTime());
-            setDurationMinutes(value.getDurationMinutes());
-            setIsAdultsFlg(value.getIsAdultsFlg());
+            setEventEndTime(value.getEventEndTime());
+            setIsAdults(value.getIsAdults());
+            setGenderRestriction(value.getGenderRestriction());
             setLocationName(value.getLocationName());
             setLocationLat(value.getLocationLat());
             setLocationLon(value.getLocationLon());
             setLocationGeo(value.getLocationGeo());
             setPrice(value.getPrice());
             setMaxParticipants(value.getMaxParticipants());
-            setCurrentParticipants(value.getCurrentParticipants());
             setStatus(value.getStatus());
             setCreatedAt(value.getCreatedAt());
             setUpdatedAt(value.getUpdatedAt());

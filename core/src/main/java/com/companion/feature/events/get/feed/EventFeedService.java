@@ -10,6 +10,7 @@ import com.companion.jooq.generated.tables.pojos.Events;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public class EventFeedService implements DisplayObjectsService<Events, EventFeedSpecificationBody> {
 
     private static final Logger log = LoggerFactory.getLogger(EventFeedService.class);
-    private static final String LOG_PREFIX = "Service> GET events";
+    private static final String LOG_PREFIX = "Service> GET events feed";
 
     private final EventFeedRepository eventFeedRepository;
 
@@ -26,7 +27,8 @@ public class EventFeedService implements DisplayObjectsService<Events, EventFeed
     }
 
     @Override
-    public Result<QueryResult<Events>, List<ErrorDetail>> get(EventFeedSpecificationBody querySpecification) {
+    @Transactional(readOnly = true)
+    public Result<QueryResult<Events>, List<ErrorDetail>> find(EventFeedSpecificationBody querySpecification) {
 
         log.info("{} start with specification: {}", LOG_PREFIX, querySpecification);
 
