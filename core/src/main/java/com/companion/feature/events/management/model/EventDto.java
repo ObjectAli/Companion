@@ -1,7 +1,9 @@
 package com.companion.feature.events.management.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -9,6 +11,8 @@ import java.util.UUID;
 
 @Builder
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class EventDto {
 
     private UUID id;
@@ -16,8 +20,9 @@ public class EventDto {
     private String title;
     private String description;
     private String category;
+    private String genderRestriction;
     private LocalDateTime eventTime;
-    private Integer durationMinutes;
+    private LocalDateTime eventEndTime;
     private String locationName;
     private Double locationLat;
     private Double locationLon;
@@ -26,7 +31,7 @@ public class EventDto {
     private Integer maxParticipants;
     private Integer currentParticipants;
     private EventStatus status;
-    private Boolean onlyFor18;
+    private Boolean isAdults;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -37,8 +42,9 @@ public class EventDto {
                 .title(createEventDto.getTitle())
                 .description(createEventDto.getDescription())
                 .category(createEventDto.getCategory())
+                .genderRestriction(createEventDto.getGenderRestriction())
                 .eventTime(createEventDto.getEventTime())
-                .durationMinutes(createEventDto.getDurationMinutes())
+                .eventEndTime(createEventDto.getEventEndTime())
                 .locationName(createEventDto.getLocationName())
                 .locationLat(createEventDto.getLocationLat())
                 .locationLon(createEventDto.getLocationLon())
@@ -47,7 +53,7 @@ public class EventDto {
                 .currentParticipants(0)
                 .status(EventStatus.ANNOUNCED)
                 .createdAt(LocalDateTime.now())
-                .onlyFor18(createEventDto.getOnlyFor18())
+                .isAdults(createEventDto.getIsAdults())
                 .build();
     }
 
@@ -59,8 +65,9 @@ public class EventDto {
                 .title(updateEventDto.getTitle())
                 .description(updateEventDto.getDescription())
                 .category(updateEventDto.getCategory())
+                .genderRestriction(updateEventDto.getGenderRestriction())
                 .eventTime(updateEventDto.getEventTime())
-                .durationMinutes(updateEventDto.getDurationMinutes())
+                .eventEndTime(updateEventDto.getEventEndTime())
                 .locationName(updateEventDto.getLocationName())
                 .locationLat(updateEventDto.getLocationLat())
                 .locationLon(updateEventDto.getLocationLon())
@@ -69,7 +76,7 @@ public class EventDto {
                 .currentParticipants(updateEventDto.getCurrentParticipants())
                 .status(updateEventDto.getStatus())
                 .updatedAt(LocalDateTime.now()) //replace to lastModify
-                .onlyFor18(updateEventDto.getOnlyFor18())
+                .isAdults(updateEventDto.getIsAdults())
                 .build();
     }
 }

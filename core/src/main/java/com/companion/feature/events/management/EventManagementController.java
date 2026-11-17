@@ -3,6 +3,7 @@ package com.companion.feature.events.management;
 import com.companion.common.error.ErrorDetail;
 import com.companion.feature.events.management.model.CreateEventDto;
 import com.companion.feature.events.management.model.UpdateEventDto;
+import com.companion.security.CustomUserDetails;
 import com.companion.security.service.CustomUserDetailsService;
 import com.companion.web.base.AbstractController;
 import com.companion.web.model.ApiResponse;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +21,9 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * POST   /api/v1/events                    -- создание мероприятия
- * PUT    /api/v1/events/{id}               -- редактирование мероприятия
- * DELETE /api/v1/events/{id}               -- отмена (с возвратом денег) мероприятия
+ * POST     /events                    -- создание мероприятия
+ * PUT      /events/{id}               -- редактирование мероприятия
+ * DELETE   /events/{id}               -- отмена (с возвратом денег) мероприятия
  */
 @RestController
 @RequestMapping("/events")
@@ -39,7 +41,7 @@ public class EventManagementController extends AbstractController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ApiResponse<Object>> createEvent(
             @RequestBody CreateEventDto requestBody,
-            @AuthenticationPrincipal UserPrincipal currentUser
+            @AuthenticationPrincipal CustomUserDetails currentUser
     ) {
         log.info("Start create event with body: {}", requestBody);
 
@@ -52,7 +54,7 @@ public class EventManagementController extends AbstractController {
             return throwError(errors);
         }
 
-        UUID organizerId = userDetailsService.loadUserByUsername(currentUser.getName()).getUUID();
+        UUID organizerId = currentUser.getUUID();
 
         var result = eventManagementService.create(requestBody, organizerId);
 

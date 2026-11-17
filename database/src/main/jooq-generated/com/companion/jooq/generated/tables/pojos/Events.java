@@ -4,8 +4,10 @@
 package com.companion.jooq.generated.tables.pojos;
 
 
+import com.companion.jooq.generated.enums.EventStatus;
+import com.companion.jooq.generated.enums.GenderRestriction;
+
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -24,16 +26,16 @@ public class Events implements Serializable {
     private String description;
     private String category;
     private LocalDateTime eventTime;
-    private Integer durationMinutes;
-    private Boolean isAdultsFlg;
+    private LocalDateTime eventEndTime;
+    private Boolean isAdults;
+    private GenderRestriction genderRestriction;
     private String locationName;
     private Double locationLat;
     private Double locationLon;
     private Object locationGeo;
-    private BigDecimal price;
+    private Integer price;
     private Integer maxParticipants;
-    private Integer currentParticipants;
-    private String status;
+    private EventStatus status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -46,15 +48,15 @@ public class Events implements Serializable {
         this.description = value.description;
         this.category = value.category;
         this.eventTime = value.eventTime;
-        this.durationMinutes = value.durationMinutes;
-        this.isAdultsFlg = value.isAdultsFlg;
+        this.eventEndTime = value.eventEndTime;
+        this.isAdults = value.isAdults;
+        this.genderRestriction = value.genderRestriction;
         this.locationName = value.locationName;
         this.locationLat = value.locationLat;
         this.locationLon = value.locationLon;
         this.locationGeo = value.locationGeo;
         this.price = value.price;
         this.maxParticipants = value.maxParticipants;
-        this.currentParticipants = value.currentParticipants;
         this.status = value.status;
         this.createdAt = value.createdAt;
         this.updatedAt = value.updatedAt;
@@ -67,16 +69,16 @@ public class Events implements Serializable {
         String description,
         String category,
         LocalDateTime eventTime,
-        Integer durationMinutes,
-        Boolean isAdultsFlg,
+        LocalDateTime eventEndTime,
+        Boolean isAdults,
+        GenderRestriction genderRestriction,
         String locationName,
         Double locationLat,
         Double locationLon,
         Object locationGeo,
-        BigDecimal price,
+        Integer price,
         Integer maxParticipants,
-        Integer currentParticipants,
-        String status,
+        EventStatus status,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
     ) {
@@ -86,15 +88,15 @@ public class Events implements Serializable {
         this.description = description;
         this.category = category;
         this.eventTime = eventTime;
-        this.durationMinutes = durationMinutes;
-        this.isAdultsFlg = isAdultsFlg;
+        this.eventEndTime = eventEndTime;
+        this.isAdults = isAdults;
+        this.genderRestriction = genderRestriction;
         this.locationName = locationName;
         this.locationLat = locationLat;
         this.locationLon = locationLon;
         this.locationGeo = locationGeo;
         this.price = price;
         this.maxParticipants = maxParticipants;
-        this.currentParticipants = currentParticipants;
         this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -185,31 +187,45 @@ public class Events implements Serializable {
     }
 
     /**
-     * Getter for <code>public.events.duration_minutes</code>.
+     * Getter for <code>public.events.event_end_time</code>.
      */
-    public Integer getDurationMinutes() {
-        return this.durationMinutes;
+    public LocalDateTime getEventEndTime() {
+        return this.eventEndTime;
     }
 
     /**
-     * Setter for <code>public.events.duration_minutes</code>.
+     * Setter for <code>public.events.event_end_time</code>.
      */
-    public void setDurationMinutes(Integer durationMinutes) {
-        this.durationMinutes = durationMinutes;
+    public void setEventEndTime(LocalDateTime eventEndTime) {
+        this.eventEndTime = eventEndTime;
     }
 
     /**
-     * Getter for <code>public.events.is_adults_flg</code>.
+     * Getter for <code>public.events.is_adults</code>.
      */
-    public Boolean getIsAdultsFlg() {
-        return this.isAdultsFlg;
+    public Boolean getIsAdults() {
+        return this.isAdults;
     }
 
     /**
-     * Setter for <code>public.events.is_adults_flg</code>.
+     * Setter for <code>public.events.is_adults</code>.
      */
-    public void setIsAdultsFlg(Boolean isAdultsFlg) {
-        this.isAdultsFlg = isAdultsFlg;
+    public void setIsAdults(Boolean isAdults) {
+        this.isAdults = isAdults;
+    }
+
+    /**
+     * Getter for <code>public.events.gender_restriction</code>.
+     */
+    public GenderRestriction getGenderRestriction() {
+        return this.genderRestriction;
+    }
+
+    /**
+     * Setter for <code>public.events.gender_restriction</code>.
+     */
+    public void setGenderRestriction(GenderRestriction genderRestriction) {
+        this.genderRestriction = genderRestriction;
     }
 
     /**
@@ -283,14 +299,14 @@ public class Events implements Serializable {
     /**
      * Getter for <code>public.events.price</code>.
      */
-    public BigDecimal getPrice() {
+    public Integer getPrice() {
         return this.price;
     }
 
     /**
      * Setter for <code>public.events.price</code>.
      */
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -309,30 +325,16 @@ public class Events implements Serializable {
     }
 
     /**
-     * Getter for <code>public.events.current_participants</code>.
-     */
-    public Integer getCurrentParticipants() {
-        return this.currentParticipants;
-    }
-
-    /**
-     * Setter for <code>public.events.current_participants</code>.
-     */
-    public void setCurrentParticipants(Integer currentParticipants) {
-        this.currentParticipants = currentParticipants;
-    }
-
-    /**
      * Getter for <code>public.events.status</code>.
      */
-    public String getStatus() {
+    public EventStatus getStatus() {
         return this.status;
     }
 
     /**
      * Setter for <code>public.events.status</code>.
      */
-    public void setStatus(String status) {
+    public void setStatus(EventStatus status) {
         this.status = status;
     }
 
@@ -409,17 +411,23 @@ public class Events implements Serializable {
         }
         else if (!this.eventTime.equals(other.eventTime))
             return false;
-        if (this.durationMinutes == null) {
-            if (other.durationMinutes != null)
+        if (this.eventEndTime == null) {
+            if (other.eventEndTime != null)
                 return false;
         }
-        else if (!this.durationMinutes.equals(other.durationMinutes))
+        else if (!this.eventEndTime.equals(other.eventEndTime))
             return false;
-        if (this.isAdultsFlg == null) {
-            if (other.isAdultsFlg != null)
+        if (this.isAdults == null) {
+            if (other.isAdults != null)
                 return false;
         }
-        else if (!this.isAdultsFlg.equals(other.isAdultsFlg))
+        else if (!this.isAdults.equals(other.isAdults))
+            return false;
+        if (this.genderRestriction == null) {
+            if (other.genderRestriction != null)
+                return false;
+        }
+        else if (!this.genderRestriction.equals(other.genderRestriction))
             return false;
         if (this.locationName == null) {
             if (other.locationName != null)
@@ -457,12 +465,6 @@ public class Events implements Serializable {
         }
         else if (!this.maxParticipants.equals(other.maxParticipants))
             return false;
-        if (this.currentParticipants == null) {
-            if (other.currentParticipants != null)
-                return false;
-        }
-        else if (!this.currentParticipants.equals(other.currentParticipants))
-            return false;
         if (this.status == null) {
             if (other.status != null)
                 return false;
@@ -494,15 +496,15 @@ public class Events implements Serializable {
         result = prime * result + ((this.description == null) ? 0 : this.description.hashCode());
         result = prime * result + ((this.category == null) ? 0 : this.category.hashCode());
         result = prime * result + ((this.eventTime == null) ? 0 : this.eventTime.hashCode());
-        result = prime * result + ((this.durationMinutes == null) ? 0 : this.durationMinutes.hashCode());
-        result = prime * result + ((this.isAdultsFlg == null) ? 0 : this.isAdultsFlg.hashCode());
+        result = prime * result + ((this.eventEndTime == null) ? 0 : this.eventEndTime.hashCode());
+        result = prime * result + ((this.isAdults == null) ? 0 : this.isAdults.hashCode());
+        result = prime * result + ((this.genderRestriction == null) ? 0 : this.genderRestriction.hashCode());
         result = prime * result + ((this.locationName == null) ? 0 : this.locationName.hashCode());
         result = prime * result + ((this.locationLat == null) ? 0 : this.locationLat.hashCode());
         result = prime * result + ((this.locationLon == null) ? 0 : this.locationLon.hashCode());
         result = prime * result + ((this.locationGeo == null) ? 0 : this.locationGeo.hashCode());
         result = prime * result + ((this.price == null) ? 0 : this.price.hashCode());
         result = prime * result + ((this.maxParticipants == null) ? 0 : this.maxParticipants.hashCode());
-        result = prime * result + ((this.currentParticipants == null) ? 0 : this.currentParticipants.hashCode());
         result = prime * result + ((this.status == null) ? 0 : this.status.hashCode());
         result = prime * result + ((this.createdAt == null) ? 0 : this.createdAt.hashCode());
         result = prime * result + ((this.updatedAt == null) ? 0 : this.updatedAt.hashCode());
@@ -519,15 +521,15 @@ public class Events implements Serializable {
         sb.append(", ").append(description);
         sb.append(", ").append(category);
         sb.append(", ").append(eventTime);
-        sb.append(", ").append(durationMinutes);
-        sb.append(", ").append(isAdultsFlg);
+        sb.append(", ").append(eventEndTime);
+        sb.append(", ").append(isAdults);
+        sb.append(", ").append(genderRestriction);
         sb.append(", ").append(locationName);
         sb.append(", ").append(locationLat);
         sb.append(", ").append(locationLon);
         sb.append(", ").append(locationGeo);
         sb.append(", ").append(price);
         sb.append(", ").append(maxParticipants);
-        sb.append(", ").append(currentParticipants);
         sb.append(", ").append(status);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(updatedAt);

@@ -168,7 +168,7 @@ public class Users extends TableImpl<UsersRecord> {
     /**
      * The column <code>public.users.updated_at</code>.
      */
-    public final TableField<UsersRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6).nullable(true), this, "");
+    public final TableField<UsersRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(6), this, "");
 
     private Users(Name alias, Table<UsersRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
@@ -294,13 +294,13 @@ public class Users extends TableImpl<UsersRecord> {
     @Override
     public List<Check<UsersRecord>> getChecks() {
         return Arrays.asList(
-            Internal.createCheck(this, DSL.name("chk_events_attended_val"), "((events_attended >= 0))", true),
-            Internal.createCheck(this, DSL.name("chk_events_organized_val"), "((events_organized >= 0))", true),
-            Internal.createCheck(this, DSL.name("chk_user_birth_date"), "(((birth_date IS NULL) OR (birth_date <= CURRENT_DATE)))", true),
-            Internal.createCheck(this, DSL.name("chk_user_email_fmt"), "(((email)::text ~* '^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$'::text))", true),
-            Internal.createCheck(this, DSL.name("chk_user_rating_org"), "(((organizer_rating >= (0)::double precision) AND (organizer_rating <= (5)::double precision)))", true),
-            Internal.createCheck(this, DSL.name("chk_user_rating_part"), "(((participant_rating >= (0)::double precision) AND (participant_rating <= (5)::double precision)))", true),
-            Internal.createCheck(this, DSL.name("chk_user_status_val"), "(((status)::text = ANY ((ARRAY['ACTIVE'::character varying, 'BLOCKED'::character varying, 'DELETED'::character varying])::text[])))", true)
+            Internal.createCheck(this, DSL.name("check_events_attended_val"), "((events_attended >= 0))", true),
+            Internal.createCheck(this, DSL.name("check_events_organized_val"), "((events_organized >= 0))", true),
+            Internal.createCheck(this, DSL.name("check_user_birth_date"), "(((birth_date IS NULL) OR (birth_date <= CURRENT_DATE)))", true),
+            Internal.createCheck(this, DSL.name("check_user_email_fmt"), "(((email)::text ~* '^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$'::text))", true),
+            Internal.createCheck(this, DSL.name("check_user_rating_org"), "(((organizer_rating >= (0)::double precision) AND (organizer_rating <= (5)::double precision)))", true),
+            Internal.createCheck(this, DSL.name("check_user_rating_part"), "(((participant_rating >= (0)::double precision) AND (participant_rating <= (5)::double precision)))", true),
+            Internal.createCheck(this, DSL.name("check_user_status_val"), "(((status)::text = ANY ((ARRAY['ACTIVE'::character varying, 'BLOCKED'::character varying, 'DELETED'::character varying])::text[])))", true)
         );
     }
 

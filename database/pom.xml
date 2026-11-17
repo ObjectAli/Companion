@@ -85,7 +85,7 @@
                     </jdbc>
                     <generator>
                         <database>
-                            <includes>events|users|event_participants|event_messages</includes> <!-- Генерируем классы для всех таблиц -->
+                            <includes>events|users|event_participants|event_messages|event_status|gender_restriction</includes> <!-- Генерируем классы для всех таблиц -->
                             <excludes>flyway_schema_history</excludes> <!-- Исключаем служебную таблицу Flyway -->
                             <inputSchema>public</inputSchema> <!-- Или ваша схема -->
                         </database>

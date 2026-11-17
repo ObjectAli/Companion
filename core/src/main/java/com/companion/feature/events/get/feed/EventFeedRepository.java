@@ -25,7 +25,7 @@ public class EventFeedRepository {
     }
 
     private static final Logger log = LoggerFactory.getLogger(EventFeedRepository.class);
-    private static final String LOG_PREFIX = "Repository> GET events";
+    private static final String LOG_PREFIX = "Repository> GET events feed";
 
     public Result<QueryResult<Events>, List<ErrorDetail>> find(QueryParameters queryParameters) {
         log.info("{} start with query parameters: {}", LOG_PREFIX, queryParameters);

@@ -22,7 +22,7 @@ import java.util.List;
 public class EventFeedController extends AbstractController {
 
     private static final Logger log = LoggerFactory.getLogger(EventFeedController.class);
-    private static final String LOG_PREFIX = "Controller> GET events /feed";
+    private static final String LOG_PREFIX = "Controller> GET events feed";
 
     @Autowired
     EventFeedService eventFeedService;
@@ -48,7 +48,7 @@ public class EventFeedController extends AbstractController {
         var specification = EventFeedSpecificationBody.toSpecification(request);
 
         //исполнение юз кейса - внутри происходит вызов метода репозитория с обращением к бд
-        var serviceExecute = eventFeedService.get(specification);
+        var serviceExecute = eventFeedService.find(specification);
 
         //если есть ошибки возвращаем ответ с ошибкой
         if (serviceExecute.isFailure()) {

@@ -7,12 +7,13 @@ package com.companion.jooq.generated.tables;
 import com.companion.jooq.generated.Indexes;
 import com.companion.jooq.generated.Keys;
 import com.companion.jooq.generated.Public;
+import com.companion.jooq.generated.enums.EventStatus;
+import com.companion.jooq.generated.enums.GenderRestriction;
 import com.companion.jooq.generated.tables.EventMessages.EventMessagesPath;
 import com.companion.jooq.generated.tables.EventParticipants.EventParticipantsPath;
 import com.companion.jooq.generated.tables.Users.UsersPath;
 import com.companion.jooq.generated.tables.records.EventsRecord;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
@@ -97,29 +98,34 @@ public class Events extends TableImpl<EventsRecord> {
     public final TableField<EventsRecord, LocalDateTime> EVENT_TIME = createField(DSL.name("event_time"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
 
     /**
-     * The column <code>public.events.duration_minutes</code>.
+     * The column <code>public.events.event_end_time</code>.
      */
-    public final TableField<EventsRecord, Integer> DURATION_MINUTES = createField(DSL.name("duration_minutes"), SQLDataType.INTEGER.defaultValue(DSL.field(DSL.raw("60"), SQLDataType.INTEGER)), this, "");
+    public final TableField<EventsRecord, LocalDateTime> EVENT_END_TIME = createField(DSL.name("event_end_time"), SQLDataType.LOCALDATETIME(6), this, "");
 
     /**
-     * The column <code>public.events.is_adults_flg</code>.
+     * The column <code>public.events.is_adults</code>.
      */
-    public final TableField<EventsRecord, Boolean> IS_ADULTS_FLG = createField(DSL.name("is_adults_flg"), SQLDataType.BOOLEAN.defaultValue(DSL.field(DSL.raw("false"), SQLDataType.BOOLEAN)), this, "");
+    public final TableField<EventsRecord, Boolean> IS_ADULTS = createField(DSL.name("is_adults"), SQLDataType.BOOLEAN.defaultValue(DSL.field(DSL.raw("false"), SQLDataType.BOOLEAN)), this, "");
+
+    /**
+     * The column <code>public.events.gender_restriction</code>.
+     */
+    public final TableField<EventsRecord, GenderRestriction> GENDER_RESTRICTION = createField(DSL.name("gender_restriction"), SQLDataType.VARCHAR.defaultValue(DSL.field(DSL.raw("'any'::gender_restriction"), SQLDataType.VARCHAR)).asEnumDataType(GenderRestriction.class), this, "");
 
     /**
      * The column <code>public.events.location_name</code>.
      */
-    public final TableField<EventsRecord, String> LOCATION_NAME = createField(DSL.name("location_name"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<EventsRecord, String> LOCATION_NAME = createField(DSL.name("location_name"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
      * The column <code>public.events.location_lat</code>.
      */
-    public final TableField<EventsRecord, Double> LOCATION_LAT = createField(DSL.name("location_lat"), SQLDataType.DOUBLE.nullable(false), this, "");
+    public final TableField<EventsRecord, Double> LOCATION_LAT = createField(DSL.name("location_lat"), SQLDataType.DOUBLE, this, "");
 
     /**
      * The column <code>public.events.location_lon</code>.
      */
-    public final TableField<EventsRecord, Double> LOCATION_LON = createField(DSL.name("location_lon"), SQLDataType.DOUBLE.nullable(false), this, "");
+    public final TableField<EventsRecord, Double> LOCATION_LON = createField(DSL.name("location_lon"), SQLDataType.DOUBLE, this, "");
 
     /**
      * @deprecated Unknown data type. If this is a qualified, user-defined type,
@@ -135,27 +141,22 @@ public class Events extends TableImpl<EventsRecord> {
     /**
      * The column <code>public.events.price</code>.
      */
-    public final TableField<EventsRecord, BigDecimal> PRICE = createField(DSL.name("price"), SQLDataType.NUMERIC(10, 2).nullable(false), this, "");
+    public final TableField<EventsRecord, Integer> PRICE = createField(DSL.name("price"), SQLDataType.INTEGER.nullable(false).defaultValue(DSL.field(DSL.raw("0"), SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>public.events.max_participants</code>.
      */
-    public final TableField<EventsRecord, Integer> MAX_PARTICIPANTS = createField(DSL.name("max_participants"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>public.events.current_participants</code>.
-     */
-    public final TableField<EventsRecord, Integer> CURRENT_PARTICIPANTS = createField(DSL.name("current_participants"), SQLDataType.INTEGER.defaultValue(DSL.field(DSL.raw("0"), SQLDataType.INTEGER)), this, "");
+    public final TableField<EventsRecord, Integer> MAX_PARTICIPANTS = createField(DSL.name("max_participants"), SQLDataType.INTEGER.nullable(false).defaultValue(DSL.field(DSL.raw("0"), SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>public.events.status</code>.
      */
-    public final TableField<EventsRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR(50).defaultValue(DSL.field(DSL.raw("'active'::character varying"), SQLDataType.VARCHAR)), this, "");
+    public final TableField<EventsRecord, EventStatus> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR.defaultValue(DSL.field(DSL.raw("'active'::event_status"), SQLDataType.VARCHAR)).asEnumDataType(EventStatus.class), this, "");
 
     /**
      * The column <code>public.events.created_at</code>.
      */
-    public final TableField<EventsRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field(DSL.raw("now()"), SQLDataType.LOCALDATETIME)), this, "");
+    public final TableField<EventsRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field(DSL.raw("now()"), SQLDataType.LOCALDATETIME)), this, "");
 
     /**
      * The column <code>public.events.updated_at</code>.
@@ -231,7 +232,7 @@ public class Events extends TableImpl<EventsRecord> {
 
     @Override
     public List<Index> getIndexes() {
-        return Arrays.asList(Indexes.IDX_EVENTS_EVENT_TIME, Indexes.IDX_EVENTS_LOCATION_GEO);
+        return Arrays.asList(Indexes.IDX_EVENTS_CATEGORY, Indexes.IDX_EVENTS_ORGANIZER, Indexes.IDX_EVENTS_STATUS, Indexes.IDX_EVENTS_TIME);
     }
 
     @Override
@@ -285,7 +286,11 @@ public class Events extends TableImpl<EventsRecord> {
     @Override
     public List<Check<EventsRecord>> getChecks() {
         return Arrays.asList(
-            Internal.createCheck(this, DSL.name("events_location_geo_check"), "(st_isvalid((location_geo)::geometry))", true)
+            Internal.createCheck(this, DSL.name("check_event_dates"), "(((event_end_time IS NULL) OR (event_end_time > event_time)))", true),
+            Internal.createCheck(this, DSL.name("check_events_location_geo"), "(st_isvalid((location_geo)::geometry))", true),
+            Internal.createCheck(this, DSL.name("check_location_coords"), "((((location_lat >= ('-90'::integer)::double precision) AND (location_lat <= (90)::double precision)) AND ((location_lon >= ('-180'::integer)::double precision) AND (location_lon <= (180)::double precision))))", true),
+            Internal.createCheck(this, DSL.name("check_max_participants"), "((max_participants > 0))", true),
+            Internal.createCheck(this, DSL.name("check_price"), "((price >= 0))", true)
         );
     }
 

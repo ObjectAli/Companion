@@ -46,6 +46,17 @@ public abstract class AbstractController {
         return ResponseEntity.ok(response);
     }
 
+    protected ResponseEntity<ApiResponse<Object>> notFound(String message) {
+
+        ApiResponse<Object> response = ApiResponse.builder()
+                .statusCode(404)
+                .success(false)
+                .message(FAILED + " " + message)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
     protected ResponseEntity<ApiResponse<Object>> ok(QueryResult<?> queryResult, int statusCode) {
         ApiResponse<Object> response = ApiResponse.builder()
                 .data(queryResult)
@@ -61,6 +72,17 @@ public abstract class AbstractController {
         ApiResponse<Object> response = ApiResponse.builder()
                 .data(queryResult)
                 .statusCode(statusCode)
+                .success(true)
+                .message(SUCCEEDED)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+    protected ResponseEntity<ApiResponse<Object>> getRecord(Object queryResult) {
+        ApiResponse<Object> response = ApiResponse.builder()
+                .data(queryResult)
+                .statusCode(200)
                 .success(true)
                 .message(SUCCEEDED)
                 .build();
